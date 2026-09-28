@@ -1,44 +1,72 @@
+from __future__ import annotations
+
 from contextlib import asynccontextmanager
+from typing import Optional
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from assistant import session
 from assistant.graph_builder import get_graph
 from assistant.pipeline import answer
-from routers import auth_routes, transport_routes
+
+from routers import auth_routes
+from routers import transport_routes
+from routers import nearby_routes
 
 
-# ---------------------------------------------------------------------------
-# Startup: build the graph once so the first request is not slow
-# ---------------------------------------------------------------------------
+# ============================================================
+# Application Lifespan
+# ============================================================
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    graph = get_graph()
-    print(f"Transit graph ready: {len(graph.stop_name)} stops, "
-          f"{len(graph.stops_by_route)} routes with stop data")
+    """
+    Load the transit graph when Render starts the backend.
+    """
+
+    try:
+        graph = get_graph(force_reload=True)
+
+        print("========================================")
+        print("Transit AI Backend Started")
+        print("========================================")
+        print(f"Stops loaded: {len(graph.stop_name)}")
+        print(f"Routes loaded: {len(graph.route_info)}")
+        print(
+            f"Stops with coordinates: "
+            f"{len(graph.stop_coordinates)}"
+        )
+        print("========================================")
+
+    except Exception as exc:
+        print("========================================")
+        print("Transit graph loading error")
+        print(f"Error: {exc}")
+        print("========================================")
+
     yield
 
 
+# ============================================================
+# FastAPI App
+# ============================================================
+
 app = FastAPI(
     title="Transit AI API",
-    description="AI-powered Lahore Public Transport Assistant",
-    version="2.0.0",
+    description=(
+        "Lahore Transit AI backend for authentication, "
+        "transit routes, nearby stops and AI assistance."
+    ),
+    version="1.0.0",
     lifespan=lifespan,
 )
 
 
-# ---------------------------------------------------------------------------
+# ============================================================
 # CORS
-# ---------------------------------------------------------------------------
-# A Flutter web build runs inside a browser, and browsers block requests to
-# a different address unless the server allows it. This grants that
-# permission.
-#
-# allow_origins is "*" for development only. Before deployment it must be
-# narrowed to the app's real address.
+# ============================================================
 
 app.add_middleware(
     CORSMiddleware,
@@ -49,68 +77,158 @@ app.add_middleware(
 )
 
 
-# ---------------------------------------------------------------------------
+# ============================================================
 # Routers
-# ---------------------------------------------------------------------------
-# Auth endpoints live in routers/auth_routes.py and transport endpoints in
-# routers/transport_routes.py, so this file stays readable as the API grows.
+# ============================================================
 
 app.include_router(auth_routes.router)
 app.include_router(transport_routes.router)
+app.include_router(nearby_routes.router)
 
 
-# ---------------------------------------------------------------------------
-# Schemas (what Flutter sends and receives)
-# ---------------------------------------------------------------------------
+# ============================================================
+# Chat Schemas
+# ============================================================
 
 class ChatRequest(BaseModel):
-    message: str = Field(..., min_length=1, max_length=500)
-    session_id: str = Field("default", max_length=64)
-    debug: bool = False
+    message: str
+    session_id: Optional[str] = None
 
 
 class ChatResponse(BaseModel):
     response: str
-    intent: str
-    data: dict | None = None      # structured facts, for map/list UI later
+    session_id: str
 
 
-# ---------------------------------------------------------------------------
-# System
-# ---------------------------------------------------------------------------
+# ============================================================
+# Root
+# ============================================================
 
-@app.get("/", tags=["System"])
+@app.get("/")
 def root():
-    return {"message": "Transit AI API is running", "status": "online"}
-
-
-@app.get("/health", tags=["System"])
-def health():
-    graph = get_graph()
     return {
-        "status": "healthy",
-        "stops": len(graph.stop_name),
-        "routes_with_stops": len(graph.stops_by_route),
-        "transfer_stops": len(graph.transfer_stops()),
+        "message": "Transit AI API is running",
+        "status": "online",
+        "docs": "/docs",
     }
 
 
-# ---------------------------------------------------------------------------
-# AI Assistant
-# ---------------------------------------------------------------------------
+# ============================================================
+# Health
+# ============================================================
 
-@app.post("/chat", response_model=ChatResponse, tags=["AI Assistant"])
+@app.get("/health")
+def health():
+    try:
+        graph = get_graph()
+
+        return {
+            "status": "healthy",
+            "service": "Transit AI API",
+            "stops": len(graph.stop_name),
+            "routes": len(graph.route_info),
+            "stops_with_coordinates": len(
+                graph.stop_coordinates
+            ),
+        }
+
+    except Exception as exc:
+        return {
+            "status": "degraded",
+            "service": "Transit AI API",
+            "error": str(exc),
+        }
+
+
+# ============================================================
+# AI Chat
+# ============================================================
+
+@app.post(
+    "/chat",
+    response_model=ChatResponse,
+)
 def chat(request: ChatRequest):
-    result = answer(request.message, request.session_id)
-    intent = result["intent"]
+
+    # Create a new session if needed
+    session_id = request.session_id
+
+    if not session_id:
+        session_id = session.create_session()
+
+    # Save user message
+    session.add_message(
+        session_id=session_id,
+        role="user",
+        content=request.message,
+    )
+
+    # Get previous conversation
+    history = session.get_history(
+        session_id
+    )
+
+    try:
+        result = answer(
+            request.message,
+            history=history,
+        )
+
+        if isinstance(result, dict):
+            response_text = (
+                result.get("response")
+                or result.get("answer")
+                or result.get("message")
+                or str(result)
+            )
+        else:
+            response_text = str(result)
+
+    except Exception as exc:
+        response_text = (
+            "Sorry, I could not process your request "
+            "right now."
+        )
+
+        print(
+            f"Chat processing error: {exc}"
+        )
+
+    # Save assistant response
+    session.add_message(
+        session_id=session_id,
+        role="assistant",
+        content=response_text,
+    )
+
     return ChatResponse(
-        response=result["response"],
-        intent=intent["intent"] if isinstance(intent, dict) else str(intent),
-        data=result["facts"] if request.debug else None,
+        response=response_text,
+        session_id=session_id,
     )
 
 
-@app.post("/chat/reset", tags=["AI Assistant"])
-def reset_chat(session_id: str = "default"):
-    session.reset(session_id)
-    return {"status": "cleared", "session_id": session_id}
+# ============================================================
+# Reset Chat
+# ============================================================
+
+@app.post("/chat/reset")
+def reset_chat(
+    session_id: str,
+):
+    try:
+        session.clear_session(
+            session_id
+        )
+
+        return {
+            "success": True,
+            "session_id": session_id,
+            "message": "Chat session reset successfully.",
+        }
+
+    except Exception as exc:
+        return {
+            "success": False,
+            "session_id": session_id,
+            "message": str(exc),
+        }

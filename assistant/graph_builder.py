@@ -1,121 +1,363 @@
-"""
-Builds the transit graph from the SQLite database.
-
-Nodes  = stops (stop_id)
-Edges  = "these two stops are consecutive on route X"
-
-The graph is built once at startup and kept in memory. With 316 stops and
-363 route_stop rows this takes a few milliseconds, so there is no need to
-pickle it to disk.
-
-ASSUMPTION (state this in your FYP report): routes are treated as
-bidirectional, because route_stops.csv lists one direction only. Real
-feeder routes may differ slightly in the return direction.
-"""
+from __future__ import annotations
 
 import os
-import re
 import sqlite3
 from collections import defaultdict
+from typing import Optional
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "transit_ai.db")
+
+# ============================================================
+# Database
+# ============================================================
+
+DB_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    "transit_ai.db",
+)
 
 
-def normalize(text):
-    """Lowercase, strip punctuation, collapse spaces. Used for name matching."""
-    if not text:
+# ============================================================
+# Text normalization
+# ============================================================
+
+def normalize(value: str) -> str:
+    """
+    Normalize stop names for searching/matching.
+    """
+    if value is None:
         return ""
-    text = text.lower().strip()
-    text = re.sub(r"[^a-z0-9\s]", " ", text)
-    return re.sub(r"\s+", " ", text).strip()
 
+    value = str(value).strip().lower()
+
+    # Normalize common punctuation/spaces
+    for char in [",", ".", "-", "_", "/", "\\", "(", ")", "[", "]"]:
+        value = value.replace(char, " ")
+
+    return " ".join(value.split())
+
+
+# ============================================================
+# Transit Graph
+# ============================================================
 
 class TransitGraph:
     def __init__(self):
-        self.stop_name = {}                     # stop_id -> display name
-        self.stop_ids_by_norm = defaultdict(list)  # normalized name -> [stop_id]
-        self.adjacency = defaultdict(list)      # stop_id -> [(neighbour_id, route_id)]
-        self.routes_by_stop = defaultdict(set)  # stop_id -> {route_id}
-        self.route_info = {}                    # route_id -> dict from routes table
-        self.stops_by_route = defaultdict(list)  # route_id -> [stop_id] in sequence
+        # stop_id -> stop_name
+        self.stop_name = {}
 
-    # -- lookups -----------------------------------------------------------
+        # normalized stop name -> list of stop_ids
+        self.stop_ids_by_norm = defaultdict(list)
 
-    def neighbours(self, stop_id):
-        return self.adjacency.get(stop_id, [])
+        # stop_id -> [(next_stop_id, route_id), ...]
+        self.adjacency = defaultdict(list)
 
-    def name_of(self, stop_id):
-        return self.stop_name.get(stop_id, stop_id)
+        # stop_id -> set(route_id)
+        self.routes_by_stop = defaultdict(set)
 
-    def transfer_stops(self):
-        """Stops served by more than one route."""
-        return [s for s, r in self.routes_by_stop.items() if len(r) > 1]
+        # route_id -> route information
+        self.route_info = {}
 
+        # route_id -> ordered list of stop_ids
+        self.stops_by_route = defaultdict(list)
 
-def build_graph(db_path=DB_PATH):
-    """Read the database and return a ready-to-use TransitGraph."""
-    if not os.path.exists(db_path):
-        raise FileNotFoundError(
-            f"Database not found at {db_path}. Run: python database.py"
+        # stop_id -> (latitude, longitude)
+        self.stop_coordinates = {}
+
+    # --------------------------------------------------------
+    # Coordinates
+    # --------------------------------------------------------
+
+    def coordinates_of(self, stop_id: str) -> Optional[tuple[float, float]]:
+        """
+        Return (latitude, longitude) for a stop.
+        Returns None if coordinates are unavailable.
+        """
+        return self.stop_coordinates.get(stop_id)
+
+    # --------------------------------------------------------
+    # Build graph
+    # --------------------------------------------------------
+
+    def build_graph(self, db_path: str = DB_PATH):
+        """
+        Build the complete transit graph from SQLite database.
+        """
+
+        if not os.path.exists(db_path):
+            raise FileNotFoundError(
+                f"Transit database not found: {db_path}"
+            )
+
+        # Reset graph in case build_graph() is called again
+        self.stop_name.clear()
+        self.stop_ids_by_norm.clear()
+        self.adjacency.clear()
+        self.routes_by_stop.clear()
+        self.route_info.clear()
+        self.stops_by_route.clear()
+        self.stop_coordinates.clear()
+
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
+
+        try:
+            cursor = conn.cursor()
+
+            # =================================================
+            # 1. Stops
+            # =================================================
+            #
+            # IMPORTANT:
+            # Coordinates are now loaded from SQLite.
+            #
+
+            stop_rows = cursor.execute(
+                """
+                SELECT
+                    stop_id,
+                    stop_name,
+                    latitude,
+                    longitude
+                FROM stops
+                """
+            ).fetchall()
+
+            for row in stop_rows:
+                stop_id = row["stop_id"]
+                stop_name = row["stop_name"]
+
+                self.stop_name[stop_id] = stop_name
+
+                normalized_name = normalize(stop_name)
+
+                if normalized_name:
+                    self.stop_ids_by_norm[normalized_name].append(
+                        stop_id
+                    )
+
+                # Store coordinates only when both values exist
+                if (
+                    row["latitude"] is not None
+                    and row["longitude"] is not None
+                ):
+                    try:
+                        self.stop_coordinates[stop_id] = (
+                            float(row["latitude"]),
+                            float(row["longitude"]),
+                        )
+                    except (TypeError, ValueError):
+                        pass
+
+            # =================================================
+            # 2. Routes
+            # =================================================
+
+            route_rows = cursor.execute(
+                """
+                SELECT
+                    route_id,
+                    route_type,
+                    system,
+                    origin,
+                    destination,
+                    fare_rs,
+                    operating_hours
+                FROM routes
+                """
+            ).fetchall()
+
+            for row in route_rows:
+                self.route_info[row["route_id"]] = dict(row)
+
+            # =================================================
+            # 3. Route Stops
+            # =================================================
+
+            route_stop_rows = cursor.execute(
+                """
+                SELECT
+                    route_id,
+                    stop_sequence,
+                    stop_id
+                FROM route_stops
+                ORDER BY route_id, stop_sequence
+                """
+            ).fetchall()
+
+            # Group stops by route
+            for row in route_stop_rows:
+                route_id = row["route_id"]
+                stop_id = row["stop_id"]
+
+                self.stops_by_route[route_id].append(stop_id)
+
+                # Route serving this stop
+                self.routes_by_stop[stop_id].add(route_id)
+
+            # =================================================
+            # 4. Build directed edges
+            # =================================================
+
+            for route_id, stop_ids in self.stops_by_route.items():
+
+                # Connect each stop to the next stop
+                for i in range(len(stop_ids) - 1):
+                    current_stop = stop_ids[i]
+                    next_stop = stop_ids[i + 1]
+
+                    self.adjacency[current_stop].append(
+                        (
+                            next_stop,
+                            route_id,
+                        )
+                    )
+
+        finally:
+            conn.close()
+
+        return self
+
+    # --------------------------------------------------------
+    # Basic helpers
+    # --------------------------------------------------------
+
+    def get_stop_name(self, stop_id: str) -> Optional[str]:
+        return self.stop_name.get(stop_id)
+
+    def get_route_info(self, route_id: str) -> Optional[dict]:
+        return self.route_info.get(route_id)
+
+    def get_routes_for_stop(self, stop_id: str):
+        return self.routes_by_stop.get(stop_id, set())
+
+    def get_stops_for_route(self, route_id: str):
+        return self.stops_by_route.get(route_id, [])
+
+    # --------------------------------------------------------
+    # Find stop IDs by name
+    # --------------------------------------------------------
+
+    def find_stop_ids(self, stop_name: str):
+        """
+        Return stop IDs matching a normalized stop name.
+        """
+        normalized = normalize(stop_name)
+
+        if not normalized:
+            return []
+
+        return list(
+            self.stop_ids_by_norm.get(normalized, [])
         )
 
-    graph = TransitGraph()
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
+    # --------------------------------------------------------
+    # Find stops containing search text
+    # --------------------------------------------------------
 
-    # 1. Stops
-    for row in cursor.execute("SELECT stop_id, stop_name FROM stops"):
-        graph.stop_name[row["stop_id"]] = row["stop_name"]
-        graph.stop_ids_by_norm[normalize(row["stop_name"])].append(row["stop_id"])
+    def search_stops(self, query: str):
+        """
+        Search stops using partial name matching.
+        Returns:
+            [
+                {
+                    "stop_id": ...,
+                    "stop_name": ...,
+                    "latitude": ...,
+                    "longitude": ...
+                }
+            ]
+        """
 
-    # 2. Routes (used for fares and system names)
-    for row in cursor.execute(
-        "SELECT route_id, route_type, system, origin, destination, "
-        "fare_rs, operating_hours FROM routes"
-    ):
-        graph.route_info[row["route_id"]] = dict(row)
+        normalized_query = normalize(query)
 
-    # 3. Route stops, in sequence -> edges
-    cursor.execute(
-        "SELECT route_id, stop_sequence, stop_id FROM route_stops "
-        "ORDER BY route_id, stop_sequence"
-    )
-    sequences = defaultdict(list)
-    for row in cursor.fetchall():
-        sequences[row["route_id"]].append(row["stop_id"])
+        if not normalized_query:
+            return []
 
-    for route_id, stop_ids in sequences.items():
-        graph.stops_by_route[route_id] = stop_ids
-        for stop_id in stop_ids:
-            graph.routes_by_stop[stop_id].add(route_id)
-        for a, b in zip(stop_ids, stop_ids[1:]):
-            if a == b:
-                continue
-            graph.adjacency[a].append((b, route_id))
-            graph.adjacency[b].append((a, route_id))  # bidirectional assumption
+        results = []
 
-    conn.close()
-    return graph
+        for stop_id, stop_name in self.stop_name.items():
+
+            normalized_name = normalize(stop_name)
+
+            if normalized_query in normalized_name:
+
+                coordinates = self.coordinates_of(stop_id)
+
+                latitude = None
+                longitude = None
+
+                if coordinates:
+                    latitude, longitude = coordinates
+
+                results.append(
+                    {
+                        "stop_id": stop_id,
+                        "stop_name": stop_name,
+                        "latitude": latitude,
+                        "longitude": longitude,
+                    }
+                )
+
+        return results
 
 
-# Built once, imported by the rest of the assistant.
-_graph = None
+# ============================================================
+# Global graph
+# ============================================================
+
+_graph: Optional[TransitGraph] = None
 
 
-def get_graph():
+# ============================================================
+# Get graph
+# ============================================================
+
+def get_graph(
+    db_path: str = DB_PATH,
+    force_reload: bool = False,
+) -> TransitGraph:
+    """
+    Return the global transit graph.
+
+    The graph is built once and reused.
+    """
+
     global _graph
-    if _graph is None:
-        _graph = build_graph()
+
+    if _graph is None or force_reload:
+        graph = TransitGraph()
+        graph.build_graph(db_path)
+        _graph = graph
+
     return _graph
 
 
+# ============================================================
+# Build graph immediately when requested directly
+# ============================================================
+
 if __name__ == "__main__":
-    g = build_graph()
-    print(f"Stops loaded      : {len(g.stop_name)}")
-    print(f"Routes with stops : {len(g.stops_by_route)}")
-    print(f"Transfer stops    : {len(g.transfer_stops())}")
-    sample = g.transfer_stops()[0]
-    print(f"\nNeighbours of {g.name_of(sample)} ({sample}):")
-    for neighbour, route_id in g.neighbours(sample):
-        print(f"   -> {g.name_of(neighbour):<30} via {route_id}")
+
+    graph = get_graph(force_reload=True)
+
+    print("========================================")
+    print("Transit Graph Built Successfully")
+    print("========================================")
+
+    print(f"Stops: {len(graph.stop_name)}")
+    print(f"Routes: {len(graph.route_info)}")
+    print(f"Route-stop groups: {len(graph.stops_by_route)}")
+    print(f"Stops with coordinates: {len(graph.stop_coordinates)}")
+
+    # Test first stop
+    if graph.stop_name:
+        first_stop_id = next(iter(graph.stop_name))
+
+        print()
+        print("First stop:")
+        print("ID:", first_stop_id)
+        print("Name:", graph.stop_name[first_stop_id])
+        print(
+            "Coordinates:",
+            graph.coordinates_of(first_stop_id),
+        )

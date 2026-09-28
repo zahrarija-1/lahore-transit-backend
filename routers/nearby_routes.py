@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 import math
-import os
-import sqlite3
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
 
-from assistant.graph_builder import get_graph
+from supabase_client import supabase
 
 
 router = APIRouter(
@@ -17,17 +15,7 @@ router = APIRouter(
 
 
 # ============================================================
-# Database path
-# ============================================================
-
-DB_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    "transit_ai.db",
-)
-
-
-# ============================================================
-# Haversine distance
+# Distance
 # ============================================================
 
 def haversine_km(
@@ -36,11 +24,6 @@ def haversine_km(
     lat2: float,
     lon2: float,
 ) -> float:
-    """
-    Calculate straight-line distance between two GPS coordinates.
-    Result is in kilometers.
-    """
-
     earth_radius_km = 6371.0
 
     lat1_rad = math.radians(lat1)
@@ -65,159 +48,268 @@ def haversine_km(
 
 
 # ============================================================
-# Route details from SQLite
-# ============================================================
-
-def get_route_details(route_ids: list[str]) -> dict[str, dict[str, Any]]:
-    """
-    Get complete route information from SQLite.
-    """
-
-    if not route_ids:
-        return {}
-
-    if not os.path.exists(DB_PATH):
-        raise HTTPException(
-            status_code=500,
-            detail="Transit database not found.",
-        )
-
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-
-    try:
-        placeholders = ",".join("?" for _ in route_ids)
-
-        query = f"""
-            SELECT
-                route_id,
-                route_type,
-                system,
-                origin,
-                destination,
-                fare_rs,
-                currency,
-                operating_hours,
-                headway_note,
-                source_url,
-                source_status
-            FROM routes
-            WHERE route_id IN ({placeholders})
-        """
-
-        rows = conn.execute(
-            query,
-            route_ids,
-        ).fetchall()
-
-        return {
-            row["route_id"]: dict(row)
-            for row in rows
-        }
-
-    finally:
-        conn.close()
-
-
-# ============================================================
-# Nearby endpoint
+# Nearby
 # ============================================================
 
 @router.get("")
 def nearby_stops(
-    latitude: float = Query(
-        ...,
-        ge=-90,
-        le=90,
-        description="Current GPS latitude",
-    ),
-    longitude: float = Query(
-        ...,
-        ge=-180,
-        le=180,
-        description="Current GPS longitude",
-    ),
-    radius_km: float = Query(
-        3.0,
-        gt=0,
-        le=50,
-        description="Search radius in kilometers",
-    ),
-    limit: int = Query(
-        10,
-        ge=1,
-        le=50,
-        description="Maximum number of nearby stops",
-    ),
+    latitude: float = Query(..., ge=-90, le=90),
+    longitude: float = Query(..., ge=-180, le=180),
+    radius_km: float = Query(3.0, gt=0, le=50),
+    limit: int = Query(10, ge=1, le=50),
 ):
     """
-    Find real transit stops near the user's GPS location.
+    Find real Lahore transit stops near the user's GPS location.
 
-    Uses:
-    - Real stop coordinates
-    - Real route-stop relationships
-    - Real route information
-    - Real fares
-    - Real operating hours
-    - Real headway information
+    Coordinates come directly from Supabase.
+    Route information also comes from Supabase.
     """
 
     try:
-        graph = get_graph()
+        # ----------------------------------------------------
+        # 1. Get real stops from Supabase
+        # ----------------------------------------------------
 
-    except Exception as exc:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unable to load transit graph: {exc}",
+        stop_response = (
+            supabase
+            .table("stops")
+            .select(
+                "stop_id,"
+                "stop_name,"
+                "city,"
+                "latitude,"
+                "longitude,"
+                "source_url"
+            )
+            .execute()
         )
 
-    nearby = []
+        stops = stop_response.data or []
 
-    # --------------------------------------------------------
-    # Find nearby stops
-    # --------------------------------------------------------
+        # ----------------------------------------------------
+        # 2. Find nearby stops
+        # ----------------------------------------------------
 
-    for stop_id, coordinates in graph.stop_coordinates.items():
+        nearby = []
 
-        stop_lat, stop_lon = coordinates
+        for stop in stops:
 
-        distance = haversine_km(
-            latitude,
-            longitude,
-            stop_lat,
-            stop_lon,
-        )
+            if (
+                stop.get("latitude") is None
+                or stop.get("longitude") is None
+            ):
+                continue
 
-        if distance <= radius_km:
+            try:
+                stop_lat = float(stop["latitude"])
+                stop_lon = float(stop["longitude"])
+            except (TypeError, ValueError):
+                continue
 
-            nearby.append(
-                {
-                    "stop_id": stop_id,
-                    "stop_name": graph.stop_name.get(
-                        stop_id,
-                        stop_id,
-                    ),
-                    "latitude": stop_lat,
-                    "longitude": stop_lon,
-                    "distance_km": round(distance, 3),
-                }
+            distance = haversine_km(
+                latitude,
+                longitude,
+                stop_lat,
+                stop_lon,
             )
 
-    # --------------------------------------------------------
-    # Sort nearest first
-    # --------------------------------------------------------
+            if distance <= radius_km:
+                nearby.append(
+                    {
+                        "stop_id": stop["stop_id"],
+                        "stop_name": stop["stop_name"],
+                        "city": stop.get("city"),
+                        "latitude": stop_lat,
+                        "longitude": stop_lon,
+                        "distance_km": round(
+                            distance,
+                            3,
+                        ),
+                        "source_url": stop.get(
+                            "source_url"
+                        ),
+                    }
+                )
 
-    nearby.sort(
-        key=lambda item: item["distance_km"]
-    )
+        # ----------------------------------------------------
+        # 3. Nearest first
+        # ----------------------------------------------------
 
-    nearby = nearby[:limit]
+        nearby.sort(
+            key=lambda item: item["distance_km"]
+        )
 
-    # --------------------------------------------------------
-    # No stops found
-    # --------------------------------------------------------
+        nearby = nearby[:limit]
 
-    if not nearby:
+        # ----------------------------------------------------
+        # 4. No nearby stops
+        # ----------------------------------------------------
+
+        if not nearby:
+            return {
+                "success": True,
+                "user_location": {
+                    "latitude": latitude,
+                    "longitude": longitude,
+                },
+                "radius_km": radius_km,
+                "count": 0,
+                "stops": [],
+                "message": (
+                    "No transit stops found within "
+                    f"{radius_km} km."
+                ),
+            }
+
+        # ----------------------------------------------------
+        # 5. Get route-stop relationships
+        # ----------------------------------------------------
+
+        stop_ids = [
+            stop["stop_id"]
+            for stop in nearby
+        ]
+
+        route_stop_response = (
+            supabase
+            .table("route_stops")
+            .select(
+                "route_id,"
+                "stop_sequence,"
+                "stop_id,"
+                "stop_name,"
+                "source_url"
+            )
+            .in_("stop_id", stop_ids)
+            .execute()
+        )
+
+        route_stop_rows = (
+            route_stop_response.data or []
+        )
+
+        # ----------------------------------------------------
+        # 6. Collect route IDs
+        # ----------------------------------------------------
+
+        route_ids = sorted(
+            {
+                row["route_id"]
+                for row in route_stop_rows
+                if row.get("route_id")
+            }
+        )
+
+        # ----------------------------------------------------
+        # 7. Get route details
+        # ----------------------------------------------------
+
+        route_map: dict[str, dict[str, Any]] = {}
+
+        if route_ids:
+
+            route_response = (
+                supabase
+                .table("routes")
+                .select(
+                    "route_id,"
+                    "route_type,"
+                    "system,"
+                    "origin,"
+                    "destination,"
+                    "stop_count,"
+                    "fare_rs,"
+                    "currency,"
+                    "operating_hours,"
+                    "headway_note,"
+                    "source_url,"
+                    "source_status"
+                )
+                .in_("route_id", route_ids)
+                .execute()
+            )
+
+            for route in (
+                route_response.data or []
+            ):
+                route_map[
+                    route["route_id"]
+                ] = route
+
+        # ----------------------------------------------------
+        # 8. Attach routes to each nearby stop
+        # ----------------------------------------------------
+
+        for stop in nearby:
+
+            stop_id = stop["stop_id"]
+
+            serving_route_ids = {
+                row["route_id"]
+                for row in route_stop_rows
+                if row.get("stop_id") == stop_id
+                and row.get("route_id")
+            }
+
+            routes = []
+
+            for route_id in sorted(
+                serving_route_ids
+            ):
+
+                route = route_map.get(route_id)
+
+                if not route:
+                    continue
+
+                routes.append(
+                    {
+                        "route_id": route.get(
+                            "route_id"
+                        ),
+                        "route_type": route.get(
+                            "route_type"
+                        ),
+                        "system": route.get(
+                            "system"
+                        ),
+                        "origin": route.get(
+                            "origin"
+                        ),
+                        "destination": route.get(
+                            "destination"
+                        ),
+                        "stop_count": route.get(
+                            "stop_count"
+                        ),
+                        "fare_rs": route.get(
+                            "fare_rs"
+                        ),
+                        "currency": route.get(
+                            "currency"
+                        ),
+                        "operating_hours": route.get(
+                            "operating_hours"
+                        ),
+                        "headway_note": route.get(
+                            "headway_note"
+                        ),
+                        "source_url": route.get(
+                            "source_url"
+                        ),
+                        "source_status": route.get(
+                            "source_status"
+                        ),
+                    }
+                )
+
+            stop["routes"] = routes
+            stop["route_count"] = len(routes)
+
+        # ----------------------------------------------------
+        # 9. Final response
+        # ----------------------------------------------------
+
         return {
             "success": True,
             "user_location": {
@@ -225,88 +317,18 @@ def nearby_stops(
                 "longitude": longitude,
             },
             "radius_km": radius_km,
-            "count": 0,
-            "stops": [],
-            "message": (
-                "No transit stops were found within "
-                f"{radius_km} km."
-            ),
+            "count": len(nearby),
+            "stops": nearby,
         }
 
-    # --------------------------------------------------------
-    # Collect all routes serving these stops
-    # --------------------------------------------------------
+    except Exception as exc:
 
-    route_ids = set()
-
-    for stop in nearby:
-        stop_routes = graph.get_routes_for_stop(
-            stop["stop_id"]
+        print(
+            "Nearby endpoint error:",
+            repr(exc),
         )
 
-        route_ids.update(stop_routes)
-
-    route_details = get_route_details(
-        list(route_ids)
-    )
-
-    # --------------------------------------------------------
-    # Attach route information
-    # --------------------------------------------------------
-
-    for stop in nearby:
-
-        routes = []
-
-        stop_routes = graph.get_routes_for_stop(
-            stop["stop_id"]
+        raise HTTPException(
+            status_code=500,
+            detail=f"Nearby service error: {exc}",
         )
-
-        for route_id in sorted(stop_routes):
-
-            route = route_details.get(route_id)
-
-            if not route:
-                continue
-
-            routes.append(
-                {
-                    "route_id": route.get("route_id"),
-                    "route_type": route.get("route_type"),
-                    "system": route.get("system"),
-                    "origin": route.get("origin"),
-                    "destination": route.get("destination"),
-                    "fare_rs": route.get("fare_rs"),
-                    "currency": route.get("currency"),
-                    "operating_hours": route.get(
-                        "operating_hours"
-                    ),
-                    "headway_note": route.get(
-                        "headway_note"
-                    ),
-                    "source_url": route.get(
-                        "source_url"
-                    ),
-                    "source_status": route.get(
-                        "source_status"
-                    ),
-                }
-            )
-
-        stop["routes"] = routes
-        stop["route_count"] = len(routes)
-
-    # --------------------------------------------------------
-    # Final response
-    # --------------------------------------------------------
-
-    return {
-        "success": True,
-        "user_location": {
-            "latitude": latitude,
-            "longitude": longitude,
-        },
-        "radius_km": radius_km,
-        "count": len(nearby),
-        "stops": nearby,
-    }

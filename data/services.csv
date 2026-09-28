@@ -1,0 +1,4 @@
+service_id,service,origin,destination,operating_hours,headway,source_url
+LMB-L1,Lahore Metrobus System,Gajjumata,Shahdara,06:00-22:00,2.25-3 min; 6 min in last hour,https://pma.punjab.gov.pk/operating-hours
+LFR-P1,Lahore Feeder Routes - Phase I,,,06:00-23:00,Mon-Sat peak 7-15 min; off-peak 7-20 min; Sun 20-30 min,https://pma.punjab.gov.pk/operating-hours
+OLMT-L1,Orange Line Metro Train,Dera Gujran,Ali Town,06:00-22:00,,https://pma.punjab.gov.pk/operating-hours

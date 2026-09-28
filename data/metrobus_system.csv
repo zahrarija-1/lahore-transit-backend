@@ -1,0 +1,2 @@
+route_id,line,origin,destination,corridor_length_km,stations,buses,operating_hours,headway,source_url
+LMB-L1,Line 1,Gajjumata,Shahdara,27,27,64,06:00-22:00,2.25-3 min; 6 min in last hour,https://pma.punjab.gov.pk/node/12

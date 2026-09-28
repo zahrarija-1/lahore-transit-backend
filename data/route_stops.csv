@@ -1,0 +1,364 @@
+route_id,stop_sequence,stop_id,stop_name,source_url
+FRT03,1,STOP0001,Rana Town,https://pma.punjab.gov.pk/node/466
+FRT03,2,STOP0002,Nazim Road,https://pma.punjab.gov.pk/node/466
+FRT03,3,STOP0003,Haider Road,https://pma.punjab.gov.pk/node/466
+FRT03,4,STOP0004,College Road,https://pma.punjab.gov.pk/node/466
+FRT03,5,STOP0005,Rachna Town,https://pma.punjab.gov.pk/node/466
+FRT03,6,STOP0006,Feroz Wala,https://pma.punjab.gov.pk/node/466
+FRT03,7,STOP0007,Imamia Colony,https://pma.punjab.gov.pk/node/466
+FRT03,8,STOP0008,Kala Khatai Colony,https://pma.punjab.gov.pk/node/466
+FRT03,9,STOP0009,Barkat Town,https://pma.punjab.gov.pk/node/466
+FRT03,10,STOP0010,Machas Factory,https://pma.punjab.gov.pk/node/466
+FRT03,11,STOP0011,Kashmir Park,https://pma.punjab.gov.pk/node/466
+FRT03,12,STOP0012,Wandala Road,https://pma.punjab.gov.pk/node/466
+FRT03,13,STOP0013,Shahdara Railway Station,https://pma.punjab.gov.pk/node/466
+FRT03,14,STOP0014,Kot Shahab-ud-Din,https://pma.punjab.gov.pk/node/466
+FRT03,15,STOP0015,Shahdara Lari Adda,https://pma.punjab.gov.pk/node/466
+FRT03,16,STOP0016,Shahdara Metro Station,https://pma.punjab.gov.pk/node/466
+FRT03,17,STOP0017,Niazi Interchange,https://pma.punjab.gov.pk/node/466
+FRT03,18,STOP0018,Niazi Chowk,https://pma.punjab.gov.pk/node/466
+FRT03,19,STOP0019,Metro,https://pma.punjab.gov.pk/node/466
+FRT03,20,STOP0020,Timber Market,https://pma.punjab.gov.pk/node/466
+FRT03,21,STOP0021,Azadi Chowk,https://pma.punjab.gov.pk/node/466
+FRT03,22,STOP0022,Lari Adda Goal Chaker,https://pma.punjab.gov.pk/node/466
+FRT03,23,STOP0023,Lari Adda,https://pma.punjab.gov.pk/node/466
+FRT03,24,STOP0024,Kashmiri Gate,https://pma.punjab.gov.pk/node/466
+FRT03,25,STOP0025,Sheranwala Gate,https://pma.punjab.gov.pk/node/466
+FRT03,26,STOP0026,Nawaz Sharif Hospital,https://pma.punjab.gov.pk/node/466
+FRT03,27,STOP0027,Railway Station-2,https://pma.punjab.gov.pk/node/466
+FRT03,28,STOP0028,Railway Station,https://pma.punjab.gov.pk/node/466
+FRT04,1,STOP0029,R.A Bazar,https://pma.punjab.gov.pk/node/469
+FRT04,2,STOP0030,Nadeem Chowk,https://pma.punjab.gov.pk/node/469
+FRT04,3,STOP0031,T-Stop,https://pma.punjab.gov.pk/node/469
+FRT04,4,STOP0032,Defence Mor,https://pma.punjab.gov.pk/node/469
+FRT04,5,STOP0033,Korray Stop,https://pma.punjab.gov.pk/node/469
+FRT04,6,STOP0034,Shareef Market,https://pma.punjab.gov.pk/node/469
+FRT04,7,STOP0035,College Stop,https://pma.punjab.gov.pk/node/469
+FRT04,8,STOP0036,Walton,https://pma.punjab.gov.pk/node/469
+FRT04,9,STOP0037,Bab e Pakistan,https://pma.punjab.gov.pk/node/469
+FRT04,10,STOP0038,Workshop,https://pma.punjab.gov.pk/node/469
+FRT04,11,STOP0039,Package,https://pma.punjab.gov.pk/node/469
+FRT04,12,STOP0040,Qainchi,https://pma.punjab.gov.pk/node/469
+FRT04,13,STOP0041,Ghazi Chowk,https://pma.punjab.gov.pk/node/469
+FRT04,14,STOP0042,Kot Chungi Amar Sidhu,https://pma.punjab.gov.pk/node/469
+FRT05,1,STOP0043,Bhatti Chowk,https://pma.punjab.gov.pk/node/470
+FRT05,2,STOP0044,Texali Chowk,https://pma.punjab.gov.pk/node/470
+FRT05,3,STOP0045,Lari Adda Gol Chaker,https://pma.punjab.gov.pk/node/470
+FRT05,4,STOP0046,Badami Bagh,https://pma.punjab.gov.pk/node/470
+FRT05,5,STOP0047,Sabzi Mandi,https://pma.punjab.gov.pk/node/470
+FRT05,6,STOP0048,Usman Chowk,https://pma.punjab.gov.pk/node/470
+FRT05,7,STOP0049,Lohay Wali Pully,https://pma.punjab.gov.pk/node/470
+FRT05,8,STOP0050,Ali Hajwery Shadi Hall,https://pma.punjab.gov.pk/node/470
+FRT05,9,STOP0051,Masoom Shah Darbar,https://pma.punjab.gov.pk/node/470
+FRT05,10,STOP0052,Madina Chowk,https://pma.punjab.gov.pk/node/470
+FRT05,11,STOP0053,Rajput Park,https://pma.punjab.gov.pk/node/470
+FRT05,12,STOP0054,Shadbagh Underpass,https://pma.punjab.gov.pk/node/470
+FRT07,1,STOP0055,Depot Chowk,https://pma.punjab.gov.pk/node/482
+FRT07,2,STOP0056,Pully Bus Stop,https://pma.punjab.gov.pk/node/482
+FRT07,3,STOP0057,Minhaj University,https://pma.punjab.gov.pk/node/482
+FRT07,4,STOP0058,Hamdard Chowk,https://pma.punjab.gov.pk/node/482
+FRT07,5,STOP0059,Somi Centre Bus Stop,https://pma.punjab.gov.pk/node/482
+FRT07,6,STOP0060,Nursary Bus Stop,https://pma.punjab.gov.pk/node/482
+FRT07,7,STOP0061,Rehmat Eye Hospital,https://pma.punjab.gov.pk/node/482
+FRT07,8,STOP0062,Pindi Stop,https://pma.punjab.gov.pk/node/482
+FRT07,9,STOP0063,Treet Stop,https://pma.punjab.gov.pk/node/482
+FRT07,10,STOP0064,Peco Mor,https://pma.punjab.gov.pk/node/482
+FRT07,11,STOP0065,Kotlakhpat Railway Station,https://pma.punjab.gov.pk/node/482
+FRT07,12,STOP0066,Phatki Stop,https://pma.punjab.gov.pk/node/482
+FRT07,13,STOP0067,Phattak Mandi Stop,https://pma.punjab.gov.pk/node/482
+FRT07,14,STOP0068,Kot Model Town Katchery,https://pma.punjab.gov.pk/node/482
+FRT07,15,STOP0069,Qainchi Stop,https://pma.punjab.gov.pk/node/482
+FRT07,16,STOP0041,Ghazi Chowk,https://pma.punjab.gov.pk/node/482
+FRT07,17,STOP0070,Chungi Amer Sidhu,https://pma.punjab.gov.pk/node/482
+FRT08,1,STOP0071,Canal,https://pma.punjab.gov.pk/node/483
+FRT08,2,STOP0072,Qaddafi Stadium,https://pma.punjab.gov.pk/node/483
+FRT08,3,STOP0073,Kalma Chowk,https://pma.punjab.gov.pk/node/483
+FRT08,4,STOP0074,Barkat Market,https://pma.punjab.gov.pk/node/483
+FRT08,5,STOP0075,Campus Pull,https://pma.punjab.gov.pk/node/483
+FRT08,6,STOP0076,Gate No.4,https://pma.punjab.gov.pk/node/483
+FRT08,7,STOP0077,Haily College,https://pma.punjab.gov.pk/node/483
+FRT08,8,STOP0078,IBA Stop,https://pma.punjab.gov.pk/node/483
+FRT08,9,STOP0079,Shah Di Khoi Jinnah Hospital,https://pma.punjab.gov.pk/node/483
+FRT08,10,STOP0080,Wafaqi Colony,https://pma.punjab.gov.pk/node/483
+FRT08,11,STOP0081,Doctor Hospital,https://pma.punjab.gov.pk/node/483
+FRT08,12,STOP0082,PCSIR-1,https://pma.punjab.gov.pk/node/483
+FRT08,13,STOP0083,G-4 Johar Town,https://pma.punjab.gov.pk/node/483
+FRT08,14,STOP0084,Kot Hanjarwal,https://pma.punjab.gov.pk/node/483
+FRT08,15,STOP0085,Mughal Eye Hospital,https://pma.punjab.gov.pk/node/483
+FRT08,16,STOP0086,Canal View Gate 1,https://pma.punjab.gov.pk/node/483
+FRT08,17,STOP0087,Judicial Colony,https://pma.punjab.gov.pk/node/483
+FRT08,18,STOP0088,Thokar Niaz Baig,https://pma.punjab.gov.pk/node/483
+FRT08,19,STOP0089,Daewoo Terminal,https://pma.punjab.gov.pk/node/483
+FRT09,1,STOP0028,Railway Station,https://pma.punjab.gov.pk/node/484
+FRT09,2,STOP0090,Haji Camp,https://pma.punjab.gov.pk/node/484
+FRT09,3,STOP0091,Police Line,https://pma.punjab.gov.pk/node/484
+FRT09,4,STOP0092,Shimla Pahari,https://pma.punjab.gov.pk/node/484
+FRT09,5,STOP0093,Shimla Pahari-2,https://pma.punjab.gov.pk/node/484
+FRT09,6,STOP0094,Aiwan-e-Iqbal,https://pma.punjab.gov.pk/node/484
+FRT09,7,STOP0007,Imamia Colony,https://pma.punjab.gov.pk/node/484
+FRT09,8,STOP0095,Charing Cross,https://pma.punjab.gov.pk/node/484
+FRT09,9,STOP0096,Ganga Ram Hospital,https://pma.punjab.gov.pk/node/484
+FRT09,10,STOP0097,Waris Road,https://pma.punjab.gov.pk/node/484
+FRT09,11,STOP0098,Qartaba Chowk,https://pma.punjab.gov.pk/node/484
+FRT09,12,STOP0099,Chuburji,https://pma.punjab.gov.pk/node/484
+FRT10,1,STOP0100,Wahdat Road Station,https://pma.punjab.gov.pk/node/485
+FRT10,2,STOP0101,Multan Chungi,https://pma.punjab.gov.pk/node/485
+FRT10,3,STOP0102,Elephant Link Road,https://pma.punjab.gov.pk/node/485
+FRT10,4,STOP0103,Mustafa Town,https://pma.punjab.gov.pk/node/485
+FRT10,5,STOP0104,Karim Block Market,https://pma.punjab.gov.pk/node/485
+FRT10,6,STOP0105,Sikandar Block,https://pma.punjab.gov.pk/node/485
+FRT10,7,STOP0106,Raza Block,https://pma.punjab.gov.pk/node/485
+FRT10,8,STOP0107,PU Examination Hall,https://pma.punjab.gov.pk/node/485
+FRT10,9,STOP0108,Science College,https://pma.punjab.gov.pk/node/485
+FRT10,10,STOP0109,Bhekewal Morr,https://pma.punjab.gov.pk/node/485
+FRT10,11,STOP0110,Wahdat Colony,https://pma.punjab.gov.pk/node/485
+FRT10,12,STOP0111,School Stop,https://pma.punjab.gov.pk/node/485
+FRT10,13,STOP0112,Bank Stop,https://pma.punjab.gov.pk/node/485
+FRT10,14,STOP0113,Kot Naqsha Stop,https://pma.punjab.gov.pk/node/485
+FRT10,15,STOP0114,Karma Abad,https://pma.punjab.gov.pk/node/485
+FRT10,16,STOP0115,Aab Para Market,https://pma.punjab.gov.pk/node/485
+FRT10,17,STOP0071,Canal,https://pma.punjab.gov.pk/node/485
+FRT10,18,STOP0116,Rehman Pura,https://pma.punjab.gov.pk/node/485
+FRT10,19,STOP0117,Ichara,https://pma.punjab.gov.pk/node/485
+FRT10,20,STOP0118,Shama,https://pma.punjab.gov.pk/node/485
+FRT10,21,STOP0119,LOS,https://pma.punjab.gov.pk/node/485
+FRT10,22,STOP0098,Qartaba Chowk,https://pma.punjab.gov.pk/node/485
+FRT11,1,STOP0120,Main Market Gulberg,https://pma.punjab.gov.pk/node/486
+FRT11,2,STOP0121,McDonald's 1,https://pma.punjab.gov.pk/node/486
+FRT11,3,STOP0122,Siddique Trade Center,https://pma.punjab.gov.pk/node/486
+FRT11,4,STOP0123,McDonalds 2,https://pma.punjab.gov.pk/node/486
+FRT11,5,STOP0124,Main Market-2,https://pma.punjab.gov.pk/node/486
+FRT11,6,STOP0125,Mini Market,https://pma.punjab.gov.pk/node/486
+FRT11,7,STOP0126,Hafeez Center,https://pma.punjab.gov.pk/node/486
+FRT11,8,STOP0127,Liberty Chowk,https://pma.punjab.gov.pk/node/486
+FRT11,9,STOP0128,Center Point,https://pma.punjab.gov.pk/node/486
+FRT11,10,STOP0074,Barkat Market,https://pma.punjab.gov.pk/node/486
+FRT11,11,STOP0075,Campus Pull,https://pma.punjab.gov.pk/node/486
+FRT11,12,STOP0129,PU Campus,https://pma.punjab.gov.pk/node/486
+FRT11,13,STOP0130,Shaikh Zaid Hospital,https://pma.punjab.gov.pk/node/486
+FRT11,14,STOP0109,Bhekewal Morr,https://pma.punjab.gov.pk/node/486
+FRT11,15,STOP0131,Pilot School,https://pma.punjab.gov.pk/node/486
+FRT11,16,STOP0132,Farooq Hospital,https://pma.punjab.gov.pk/node/486
+FRT11,17,STOP0133,Gulshan-E-Iqbal,https://pma.punjab.gov.pk/node/486
+FRT11,18,STOP0134,Dubai Chowk,https://pma.punjab.gov.pk/node/486
+FRT11,19,STOP0135,Flat Stop,https://pma.punjab.gov.pk/node/486
+FRT11,20,STOP0136,Kali Khthi Stop,https://pma.punjab.gov.pk/node/486
+FRT11,21,STOP0137,Scheme Morr,https://pma.punjab.gov.pk/node/486
+FRT11,22,STOP0138,Grand Battery Stop,https://pma.punjab.gov.pk/node/486
+FRT11,23,STOP0139,Chowk Yateem Khana,https://pma.punjab.gov.pk/node/486
+FRT11,24,STOP0140,City Bus Stand,https://pma.punjab.gov.pk/node/486
+FRT11,25,STOP0141,Shezan Factory,https://pma.punjab.gov.pk/node/486
+FRT11,26,STOP0142,Niazi Adda,https://pma.punjab.gov.pk/node/486
+FRT11,27,STOP0143,Bilal Daewoo,https://pma.punjab.gov.pk/node/486
+FRT11,28,STOP0144,Babu Sabu,https://pma.punjab.gov.pk/node/486
+FRT12,1,STOP0029,R.A Bazar,https://pma.punjab.gov.pk/node/487
+FRT12,2,STOP0145,PAF Market,https://pma.punjab.gov.pk/node/487
+FRT12,3,STOP0146,Telephone Exchange,https://pma.punjab.gov.pk/node/487
+FRT12,4,STOP0147,Girja Chowk,https://pma.punjab.gov.pk/node/487
+FRT12,5,STOP0148,Alla-Ud-Din Road,https://pma.punjab.gov.pk/node/487
+FRT12,6,STOP0149,Afshan Chowk,https://pma.punjab.gov.pk/node/487
+FRT12,7,STOP0150,Rahat Bakery,https://pma.punjab.gov.pk/node/487
+FRT12,8,STOP0151,Fortress Stadium,https://pma.punjab.gov.pk/node/487
+FRT12,9,STOP0152,Mian Mir,https://pma.punjab.gov.pk/node/487
+FRT12,10,STOP0153,GymKhana,https://pma.punjab.gov.pk/node/487
+FRT12,11,STOP0154,Canal Bridge,https://pma.punjab.gov.pk/node/487
+FRT12,12,STOP0155,Aitchison College,https://pma.punjab.gov.pk/node/487
+FRT12,13,STOP0156,Club Road,https://pma.punjab.gov.pk/node/487
+FRT12,14,STOP0157,PC Hotel,https://pma.punjab.gov.pk/node/487
+FRT12,15,STOP0158,Governor House,https://pma.punjab.gov.pk/node/487
+FRT12,16,STOP0159,Lahore Zoo,https://pma.punjab.gov.pk/node/487
+FRT12,17,STOP0095,Charing Cross,https://pma.punjab.gov.pk/node/487
+FRT12,18,STOP0160,Regal Chowk,https://pma.punjab.gov.pk/node/487
+FRT12,19,STOP0161,GPO,https://pma.punjab.gov.pk/node/487
+FRT12,20,STOP0162,Anarkali,https://pma.punjab.gov.pk/node/487
+FRT12,21,STOP0163,PU Old Campus,https://pma.punjab.gov.pk/node/487
+FRT12,22,STOP0164,Government College University,https://pma.punjab.gov.pk/node/487
+FRT12,23,STOP0165,Nasir Bagh,https://pma.punjab.gov.pk/node/487
+FRT13,1,STOP0055,Depot Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,2,STOP0166,Bagrian,https://pma.punjab.gov.pk/node/520
+FRT13,3,STOP0167,Muslim Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,4,STOP0317,Ghazi Chowk (Township),https://pma.punjab.gov.pk/node/520
+FRT13,5,STOP0168,Gondal Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,6,STOP0169,Butt Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,7,STOP0170,Lajhna Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,8,STOP0171,UMT Stop,https://pma.punjab.gov.pk/node/520
+FRT13,9,STOP0172,Khokhar Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,10,STOP0173,M. Ali Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,11,STOP0174,Aslam Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,12,STOP0175,Akber Chowk,https://pma.punjab.gov.pk/node/520
+FRT13,13,STOP0112,Bank Stop,https://pma.punjab.gov.pk/node/520
+FRT13,14,STOP0176,Mochipura Morr,https://pma.punjab.gov.pk/node/520
+FRT13,15,STOP0177,Model Town Link Road,https://pma.punjab.gov.pk/node/520
+FRT13,16,STOP0178,Al-Habib Stop,https://pma.punjab.gov.pk/node/520
+FRT13,17,STOP0062,Pindi Stop,https://pma.punjab.gov.pk/node/520
+FRT13,18,STOP0063,Treet Stop,https://pma.punjab.gov.pk/node/520
+FRT13,19,STOP0179,Peco Morr,https://pma.punjab.gov.pk/node/520
+FRT13,20,STOP0180,Kot Lakhpat Railway Station,https://pma.punjab.gov.pk/node/520
+FRT13,21,STOP0181,Phatki,https://pma.punjab.gov.pk/node/520
+FRT13,22,STOP0182,Phatak Mandi,https://pma.punjab.gov.pk/node/520
+FRT13,23,STOP0318,Sabzi Mandi (Township),https://pma.punjab.gov.pk/node/520
+FRT13,24,STOP0183,Ittefaq Hospital,https://pma.punjab.gov.pk/node/520
+FRT13,25,STOP0184,Gulab Devi Hospital,https://pma.punjab.gov.pk/node/520
+FRT13,26,STOP0185,Naseerabad,https://pma.punjab.gov.pk/node/520
+FRT13,27,STOP0186,Bhabra Stop,https://pma.punjab.gov.pk/node/520
+FRT13,28,STOP0187,Model Town,https://pma.punjab.gov.pk/node/520
+FRT13,29,STOP0073,Kalma Chowk,https://pma.punjab.gov.pk/node/520
+FRT14,1,STOP0188,Purana Kahna,https://pma.punjab.gov.pk/node/523
+FRT14,2,STOP0189,Malik Pura,https://pma.punjab.gov.pk/node/523
+FRT14,3,STOP0190,5 Number Stop,https://pma.punjab.gov.pk/node/523
+FRT14,4,STOP0191,Railu Wali Masjid,https://pma.punjab.gov.pk/node/523
+FRT14,5,STOP0192,Kahna,https://pma.punjab.gov.pk/node/523
+FRT14,6,STOP0193,Darbar Barket Shah,https://pma.punjab.gov.pk/node/523
+FRT14,7,STOP0194,Ahlu Road,https://pma.punjab.gov.pk/node/523
+FRT14,8,STOP0195,Rehmat Park,https://pma.punjab.gov.pk/node/523
+FRT14,9,STOP0196,LDA Gol Chakar,https://pma.punjab.gov.pk/node/523
+FRT14,10,STOP0197,Gajjumata,https://pma.punjab.gov.pk/node/523
+FRT14,11,STOP0198,Masjid Ibrahim,https://pma.punjab.gov.pk/node/523
+FRT14,12,STOP0199,Dulla Khurd,https://pma.punjab.gov.pk/node/523
+FRT14,13,STOP0200,Dulam,https://pma.punjab.gov.pk/node/523
+FRT14,14,STOP0201,Yohanabad,https://pma.punjab.gov.pk/node/523
+FRT14,15,STOP0202,Nishtar Colony,https://pma.punjab.gov.pk/node/523
+FRT14,16,STOP0203,Descon Headquarters,https://pma.punjab.gov.pk/node/523
+FRT14,17,STOP0204,Attari Saroba,https://pma.punjab.gov.pk/node/523
+FRT14,18,STOP0205,Venus Housing,https://pma.punjab.gov.pk/node/523
+FRT14,19,STOP0206,Kamahan,https://pma.punjab.gov.pk/node/523
+FRT14,20,STOP0207,Chungi Metro Station,https://pma.punjab.gov.pk/node/523
+FRT14,21,STOP0041,Ghazi Chowk,https://pma.punjab.gov.pk/node/523
+FRT14,22,STOP0208,Shoukat Town,https://pma.punjab.gov.pk/node/523
+FRT14,23,STOP0209,Naka Stop,https://pma.punjab.gov.pk/node/523
+FRT14,24,STOP0210,Chota Ishara Stop,https://pma.punjab.gov.pk/node/523
+FRT14,25,STOP0211,Sector C (Y-Block),https://pma.punjab.gov.pk/node/523
+FRT14,26,STOP0212,LESCO,https://pma.punjab.gov.pk/node/523
+FRT14,27,STOP0213,Chara Pind,https://pma.punjab.gov.pk/node/523
+FRT14,28,STOP0214,DHA Nursery,https://pma.punjab.gov.pk/node/523
+FRT14,29,STOP0215,Defence Chowk,https://pma.punjab.gov.pk/node/523
+FRT14,30,STOP0216,PSO,https://pma.punjab.gov.pk/node/523
+FRT14,31,STOP0217,Bhatta Chowk,https://pma.punjab.gov.pk/node/523
+FRT14,32,STOP0218,Arifabad,https://pma.punjab.gov.pk/node/523
+FRT14,33,STOP0219,Nadirabad,https://pma.punjab.gov.pk/node/523
+FRT14,34,STOP0220,Ali View Garden,https://pma.punjab.gov.pk/node/523
+FRT14,35,STOP0221,Cantt. Bus Stop,https://pma.punjab.gov.pk/node/523
+FRT14,36,STOP0222,Fauji Foundation,https://pma.punjab.gov.pk/node/523
+FRT14,37,STOP0029,R.A Bazar,https://pma.punjab.gov.pk/node/523
+FRT15,1,STOP0043,Bhatti Chowk,https://pma.punjab.gov.pk/node/524
+FRT15,2,STOP0223,Katchery,https://pma.punjab.gov.pk/node/524
+FRT15,3,STOP0165,Nasir Bagh,https://pma.punjab.gov.pk/node/524
+FRT15,4,STOP0224,Civil Secretariat,https://pma.punjab.gov.pk/node/524
+FRT15,5,STOP0225,M.A.O College,https://pma.punjab.gov.pk/node/524
+FRT15,6,STOP0226,Anarkali Metro Station,https://pma.punjab.gov.pk/node/524
+FRT15,7,STOP0227,Janazgah,https://pma.punjab.gov.pk/node/524
+FRT15,8,STOP0098,Qartaba Chowk,https://pma.punjab.gov.pk/node/524
+FRT15,9,STOP0228,Mazang,https://pma.punjab.gov.pk/node/524
+FRT15,10,STOP0229,Roznama Pakistan,https://pma.punjab.gov.pk/node/524
+FRT15,11,STOP0230,Lahore College,https://pma.punjab.gov.pk/node/524
+FRT15,12,STOP0231,Services Hospital,https://pma.punjab.gov.pk/node/524
+FRT15,13,STOP0232,Punjab Institute of Cardiology,https://pma.punjab.gov.pk/node/524
+FRT15,14,STOP0233,Kinnaird College,https://pma.punjab.gov.pk/node/524
+FRT15,15,STOP0234,Zafar Ali Road,https://pma.punjab.gov.pk/node/524
+FRT15,16,STOP0122,Siddique Trade Center,https://pma.punjab.gov.pk/node/524
+FRT15,17,STOP0235,McDonald,https://pma.punjab.gov.pk/node/524
+FRT15,18,STOP0236,Main Market,https://pma.punjab.gov.pk/node/524
+FRT15,19,STOP0125,Mini market,https://pma.punjab.gov.pk/node/524
+FRT15,20,STOP0126,Hafeez Center,https://pma.punjab.gov.pk/node/524
+FRT15,21,STOP0073,Kalma Chowk,https://pma.punjab.gov.pk/node/524
+FRT15,22,STOP0127,Liberty Chowk,https://pma.punjab.gov.pk/node/524
+FRT15,23,STOP0128,Center Point,https://pma.punjab.gov.pk/node/524
+FRT15,24,STOP0237,Firdous Market,https://pma.punjab.gov.pk/node/524
+FRT15,25,STOP0238,Cavalry Road T-Stop,https://pma.punjab.gov.pk/node/524
+FRT15,26,STOP0030,Nadeem Chowk,https://pma.punjab.gov.pk/node/524
+FRT15,27,STOP0029,R.A Bazar,https://pma.punjab.gov.pk/node/524
+FRT16,1,STOP0071,Canal,https://pma.punjab.gov.pk/node/551
+FRT16,2,STOP0072,Qaddafi Stadium,https://pma.punjab.gov.pk/node/551
+FRT16,3,STOP0073,Kalma Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,4,STOP0239,Model Town Morr,https://pma.punjab.gov.pk/node/551
+FRT16,5,STOP0240,Pakistani Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,6,STOP0241,Bank Square C-Block,https://pma.punjab.gov.pk/node/551
+FRT16,7,STOP0242,Ladies Club D-Block,https://pma.punjab.gov.pk/node/551
+FRT16,8,STOP0243,Girls College E-Block,https://pma.punjab.gov.pk/node/551
+FRT16,9,STOP0244,F-Block,https://pma.punjab.gov.pk/node/551
+FRT16,10,STOP0245,Club Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,11,STOP0246,Quid-e-Azam Law College,https://pma.punjab.gov.pk/node/551
+FRT16,12,STOP0247,Shaheed Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,13,STOP0248,Pace Shopping Centre,https://pma.punjab.gov.pk/node/551
+FRT16,14,STOP0249,McDonald's,https://pma.punjab.gov.pk/node/551
+FRT16,15,STOP0177,Model Town Link Road,https://pma.punjab.gov.pk/node/551
+FRT16,16,STOP0176,Mochipura Morr,https://pma.punjab.gov.pk/node/551
+FRT16,17,STOP0250,Akbar Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,18,STOP0251,Shouq Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,19,STOP0252,Allah-Hoo Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,20,STOP0253,Aleem Dar Stadium,https://pma.punjab.gov.pk/node/551
+FRT16,21,STOP0254,LDA Plaza,https://pma.punjab.gov.pk/node/551
+FRT16,22,STOP0255,Shadiwal Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,23,STOP0256,Shaukat Khanum Hospital,https://pma.punjab.gov.pk/node/551
+FRT16,24,STOP0257,Wapda Town Gate 1 Stop 1,https://pma.punjab.gov.pk/node/551
+FRT16,25,STOP0258,Wapda Town Gate 1 Stop 2,https://pma.punjab.gov.pk/node/551
+FRT16,26,STOP0259,UCP,https://pma.punjab.gov.pk/node/551
+FRT16,27,STOP0260,PCSIR,https://pma.punjab.gov.pk/node/551
+FRT16,28,STOP0261,Abdalian Society,https://pma.punjab.gov.pk/node/551
+FRT16,29,STOP0262,Ayub Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,30,STOP0263,Expo Centre,https://pma.punjab.gov.pk/node/551
+FRT16,31,STOP0264,Shan Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,32,STOP0265,Ring Chowk,https://pma.punjab.gov.pk/node/551
+FRT16,33,STOP0087,Judicial Colony,https://pma.punjab.gov.pk/node/551
+FRT16,34,STOP0088,Thokar Niaz Baig,https://pma.punjab.gov.pk/node/551
+FRT16,35,STOP0089,Daewoo Terminal,https://pma.punjab.gov.pk/node/551
+FRT17,1,STOP0197,Gajjumata,https://pma.punjab.gov.pk/node/552
+FRT17,2,STOP0266,Ali Murtaza Associates,https://pma.punjab.gov.pk/node/552
+FRT17,3,STOP0267,Nishat Mills,https://pma.punjab.gov.pk/node/552
+FRT17,4,STOP0268,Shafi Reso,https://pma.punjab.gov.pk/node/552
+FRT17,5,STOP0269,Ghankar Stop,https://pma.punjab.gov.pk/node/552
+FRT17,6,STOP0270,Bhuller Village,https://pma.punjab.gov.pk/node/552
+FRT17,7,STOP0271,Transport Housing Society,https://pma.punjab.gov.pk/node/552
+FRT17,8,STOP0272,Hush Puppies,https://pma.punjab.gov.pk/node/552
+FRT17,9,STOP0273,Raja Bhula Pull,https://pma.punjab.gov.pk/node/552
+FRT17,10,STOP0274,Nishat Dying Mills,https://pma.punjab.gov.pk/node/552
+FRT17,11,STOP0275,Deo Pull,https://pma.punjab.gov.pk/node/552
+FRT17,12,STOP0276,Nishat Apparel,https://pma.punjab.gov.pk/node/552
+FRT17,13,STOP0277,Sora Stop,https://pma.punjab.gov.pk/node/552
+FRT17,14,STOP0278,Thethar Stop,https://pma.punjab.gov.pk/node/552
+FRT17,15,STOP0279,Avicina Hospital,https://pma.punjab.gov.pk/node/552
+FRT17,16,STOP0280,Dera Chahal,https://pma.punjab.gov.pk/node/552
+FRT17,17,STOP0281,Elite School,https://pma.punjab.gov.pk/node/552
+FRT17,18,STOP0282,Workshop Stop 1,https://pma.punjab.gov.pk/node/552
+FRT17,19,STOP0283,School Stop Lidher 1,https://pma.punjab.gov.pk/node/552
+FRT17,20,STOP0284,Shehbaz Sharif Hospital 1,https://pma.punjab.gov.pk/node/552
+FRT17,21,STOP0285,Lidher 1,https://pma.punjab.gov.pk/node/552
+FRT17,22,STOP0286,Nawaz Sharif Interchange,https://pma.punjab.gov.pk/node/552
+FRT17,23,STOP0287,Lidher 2,https://pma.punjab.gov.pk/node/552
+FRT17,24,STOP0288,Shehbaz Sharif Hospital 2,https://pma.punjab.gov.pk/node/552
+FRT17,25,STOP0289,School Stop Lidher 2,https://pma.punjab.gov.pk/node/552
+FRT17,26,STOP0290,Workshop Stop 2,https://pma.punjab.gov.pk/node/552
+FRT17,27,STOP0291,Ramzan Nursery 1,https://pma.punjab.gov.pk/node/552
+FRT17,28,STOP0292,PKLI-2,https://pma.punjab.gov.pk/node/552
+FRT17,29,STOP0293,Bankers Society,https://pma.punjab.gov.pk/node/552
+FRT17,30,STOP0294,Karbath,https://pma.punjab.gov.pk/node/552
+FRT17,31,STOP0295,Total Pump,https://pma.punjab.gov.pk/node/552
+FRT17,32,STOP0296,Heir Masjid Ghosia,https://pma.punjab.gov.pk/node/552
+FRT17,33,STOP0297,Heir,https://pma.punjab.gov.pk/node/552
+FRT17,34,STOP0298,Heir Adda,https://pma.punjab.gov.pk/node/552
+FRT17,35,STOP0299,Rangers Wing Headquarter,https://pma.punjab.gov.pk/node/552
+FRT18,1,STOP0043,Bhatti Chowk,https://pma.punjab.gov.pk/node/553
+FRT18,2,STOP0044,Texali Chowk,https://pma.punjab.gov.pk/node/553
+FRT18,3,STOP0021,Azadi Chowk,https://pma.punjab.gov.pk/node/553
+FRT18,4,STOP0020,Timber Market,https://pma.punjab.gov.pk/node/553
+FRT18,5,STOP0019,Metro,https://pma.punjab.gov.pk/node/553
+FRT18,6,STOP0018,Niazi Chowk,https://pma.punjab.gov.pk/node/553
+FRT18,7,STOP0017,Niazi Interchange,https://pma.punjab.gov.pk/node/553
+FRT18,8,STOP0016,Shahdara Metro Station,https://pma.punjab.gov.pk/node/553
+FRT18,9,STOP0300,Shahdara,https://pma.punjab.gov.pk/node/553
+FRT18,10,STOP0301,Jiya Musa,https://pma.punjab.gov.pk/node/553
+FRT18,11,STOP0302,25 Number Stop,https://pma.punjab.gov.pk/node/553
+FRT18,12,STOP0303,Rustam Sohrab Factory,https://pma.punjab.gov.pk/node/553
+FRT18,13,STOP0304,Yousuf Park,https://pma.punjab.gov.pk/node/553
+FRT18,14,STOP0305,Baigum Kot,https://pma.punjab.gov.pk/node/553
+FRT18,15,STOP0306,Mairaj Park,https://pma.punjab.gov.pk/node/553
+FRT18,16,STOP0307,Chungi Stop,https://pma.punjab.gov.pk/node/553
+FRT18,17,STOP0308,Nain Sukh,https://pma.punjab.gov.pk/node/553
+FRT18,18,STOP0309,Dosako Chowk,https://pma.punjab.gov.pk/node/553
+FRT18,19,STOP0310,Kot Abdul Malik,https://pma.punjab.gov.pk/node/553
+FRT18,20,STOP0311,Main Bazar Kot Abdul Malik,https://pma.punjab.gov.pk/node/553
+FRT18,21,STOP0312,Al-Wahab Garden,https://pma.punjab.gov.pk/node/553
+FRT18,22,STOP0313,Motorway City,https://pma.punjab.gov.pk/node/553
+FRT18,23,STOP0314,Javed Nagar,https://pma.punjab.gov.pk/node/553
+FRT18,24,STOP0315,Fazal Town,https://pma.punjab.gov.pk/node/553
+FRT18,25,STOP0316,Mandiali Toll Plaza,https://pma.punjab.gov.pk/node/553

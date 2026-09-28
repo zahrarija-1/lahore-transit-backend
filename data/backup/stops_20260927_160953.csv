@@ -1,0 +1,319 @@
+stop_id,stop_name,city,latitude,longitude,source_url
+STOP0001,Rana Town,Lahore,31.684796,74.276489,https://pma.punjab.gov.pk/node/466
+STOP0002,Nazim Road,Lahore,31.678093,74.277894,https://pma.punjab.gov.pk/node/466
+STOP0003,Haider Road,Lahore,31.673049,74.278902,https://pma.punjab.gov.pk/node/466
+STOP0004,College Road,Lahore,31.667350,74.280183,https://pma.punjab.gov.pk/node/466
+STOP0005,Rachna Town,Lahore,31.659186,74.281846,https://pma.punjab.gov.pk/node/466
+STOP0006,Feroz Wala,Lahore,31.652617,74.283331,https://pma.punjab.gov.pk/node/466
+STOP0007,Imamia Colony,Lahore,31.647454,74.284541,https://pma.punjab.gov.pk/node/466
+STOP0008,Kala Khatai Colony,Lahore,31.644580,74.285122,https://pma.punjab.gov.pk/node/466
+STOP0009,Barkat Town,Lahore,31.642480,74.285518,https://pma.punjab.gov.pk/node/466
+STOP0010,Machas Factory,Lahore,31.637809,74.286324,https://pma.punjab.gov.pk/node/466
+STOP0011,Kashmir Park,Lahore,31.633149,74.287213,https://pma.punjab.gov.pk/node/466
+STOP0012,Wandala Road,Lahore,31.630076,74.287953,https://pma.punjab.gov.pk/node/466
+STOP0013,Shahdara Railway Station,Lahore,31.627539,74.288470,https://pma.punjab.gov.pk/node/466
+STOP0014,Kot Shahab-ud-Din,Lahore,31.624375,74.289093,https://pma.punjab.gov.pk/node/466
+STOP0015,Shahdara Lari Adda,Lahore,31.618369,74.290478,https://pma.punjab.gov.pk/node/466
+STOP0016,Shahdara Metro Station,Lahore,31.615462,74.291252,https://pma.punjab.gov.pk/node/466
+STOP0017,Niazi Interchange,Lahore,31.604008,74.299597,https://pma.punjab.gov.pk/node/466
+STOP0018,Niazi Chowk,Lahore,31.601392,74.299394,https://pma.punjab.gov.pk/node/466
+STOP0019,Metro,Lahore,31.597386,74.299706,https://pma.punjab.gov.pk/node/466
+STOP0020,Timber Market,Lahore,31.594976,74.301732,https://pma.punjab.gov.pk/node/466
+STOP0021,Azadi Chowk,Lahore,31.590592,74.306800,https://pma.punjab.gov.pk/node/466
+STOP0022,Lari Adda Goal Chaker,Lahore,31.595798,74.314786,https://pma.punjab.gov.pk/node/466
+STOP0023,Lari Adda,Lahore,31.592790,74.317154,https://pma.punjab.gov.pk/node/466
+STOP0024,Kashmiri Gate,Lahore,31.587819,74.321152,https://pma.punjab.gov.pk/node/466
+STOP0025,Sheranwala Gate,Lahore,31.587297,74.323890,https://pma.punjab.gov.pk/node/466
+STOP0026,Nawaz Sharif Hospital,Lahore,31.585966,74.327367,https://pma.punjab.gov.pk/node/466
+STOP0027,Railway Station-2,Lahore,31.576296,74.335913,https://pma.punjab.gov.pk/node/466
+STOP0028,Railway Station,Lahore,31.574251,74.335750,https://pma.punjab.gov.pk/node/466
+STOP0029,R.A Bazar,Lahore,31.506049,74.384966,https://pma.punjab.gov.pk/node/469
+STOP0030,Nadeem Chowk,Lahore,31.506005,74.378683,https://pma.punjab.gov.pk/node/469
+STOP0031,T-Stop,Lahore,31.501553,74.378347,https://pma.punjab.gov.pk/node/469
+STOP0032,Defence Mor,Lahore,31.494455,74.373872,https://pma.punjab.gov.pk/node/469
+STOP0033,Korray Stop,Lahore,31.492226,74.371693,https://pma.punjab.gov.pk/node/469
+STOP0034,Shareef Market,Lahore,31.490368,74.370029,https://pma.punjab.gov.pk/node/469
+STOP0035,College Stop,Lahore,31.488457,74.368186,https://pma.punjab.gov.pk/node/469
+STOP0036,Walton,Lahore,31.485850,74.365739,https://pma.punjab.gov.pk/node/469
+STOP0037,Bab e Pakistan,Lahore,31.481994,74.362044,https://pma.punjab.gov.pk/node/469
+STOP0038,Workshop,Lahore,31.478821,74.359051,https://pma.punjab.gov.pk/node/469
+STOP0039,Package,Lahore,31.471163,74.351807,https://pma.punjab.gov.pk/node/469
+STOP0040,Qainchi,Lahore,31.464652,74.349006,https://pma.punjab.gov.pk/node/469
+STOP0041,Ghazi Chowk,Lahore,31.456550,74.351330,https://pma.punjab.gov.pk/node/469
+STOP0317,Ghazi Chowk (Township),Lahore,31.436390,74.291350,https://pma.punjab.gov.pk/node/469
+STOP0042,Kot Chungi Amar Sidhu,Lahore,31.449820,74.353560,https://pma.punjab.gov.pk/node/469
+STOP0043,Bhatti Chowk,Lahore,31.581412,74.306344,https://pma.punjab.gov.pk/node/470
+STOP0044,Texali Chowk,Lahore,31.585504,74.306667,https://pma.punjab.gov.pk/node/470
+STOP0045,Lari Adda Gol Chaker,Lahore,31.595398,74.311207,https://pma.punjab.gov.pk/node/470
+STOP0046,Badami Bagh,Lahore,31.597870,74.314110,https://pma.punjab.gov.pk/node/470
+STOP0047,Sabzi Mandi,Lahore,31.600280,74.311980,https://pma.punjab.gov.pk/node/470
+STOP0318,Sabzi Mandi (Township),Lahore,31.474600,74.344000,https://pma.punjab.gov.pk/node/470
+STOP0048,Usman Chowk,Lahore,31.600295,74.317791,https://pma.punjab.gov.pk/node/470
+STOP0049,Lohay Wali Pully,Lahore,31.603510,74.318870,https://pma.punjab.gov.pk/node/470
+STOP0050,Ali Hajwery Shadi Hall,Lahore,31.602860,74.322140,https://pma.punjab.gov.pk/node/470
+STOP0051,Masoom Shah Darbar,Lahore,31.600711,74.325561,https://pma.punjab.gov.pk/node/470
+STOP0052,Madina Chowk,Lahore,31.600730,74.327800,https://pma.punjab.gov.pk/node/470
+STOP0053,Rajput Park,Lahore,31.603110,74.333600,https://pma.punjab.gov.pk/node/470
+STOP0054,Shadbagh Underpass,Lahore,31.607950,74.336110,https://pma.punjab.gov.pk/node/470
+STOP0055,Depot Chowk,Lahore,31.431004,74.311419,https://pma.punjab.gov.pk/node/482
+STOP0056,Pully Bus Stop,Lahore,31.435790,74.314200,https://pma.punjab.gov.pk/node/482
+STOP0057,Minhaj University,Lahore,31.443560,74.318320,https://pma.punjab.gov.pk/node/482
+STOP0058,Hamdard Chowk,Lahore,31.446480,74.319830,https://pma.punjab.gov.pk/node/482
+STOP0059,Somi Centre Bus Stop,Lahore,31.449800,74.321910,https://pma.punjab.gov.pk/node/482
+STOP0060,Nursary Bus Stop,Lahore,31.452810,74.323570,https://pma.punjab.gov.pk/node/482
+STOP0061,Rehmat Eye Hospital,Lahore,31.454620,74.324620,https://pma.punjab.gov.pk/node/482
+STOP0062,Pindi Stop,Lahore,31.459527,74.328288,https://pma.punjab.gov.pk/node/482
+STOP0063,Treet Stop,Lahore,31.457830,74.332450,https://pma.punjab.gov.pk/node/482
+STOP0064,Peco Mor,Lahore,31.456720,74.335250,https://pma.punjab.gov.pk/node/482
+STOP0065,Kotlakhpat Railway Station,Lahore,31.459140,74.337370,https://pma.punjab.gov.pk/node/482
+STOP0066,Phatki Stop,Lahore,31.464120,74.340390,https://pma.punjab.gov.pk/node/482
+STOP0067,Phattak Mandi Stop,Lahore,31.470970,74.344200,https://pma.punjab.gov.pk/node/482
+STOP0068,Kot Model Town Katchery,Lahore,31.473410,74.344860,https://pma.punjab.gov.pk/node/482
+STOP0069,Qainchi Stop,Lahore,31.464400,74.348100,https://pma.punjab.gov.pk/node/482
+STOP0070,Chungi Amer Sidhu,Lahore,31.449858,74.353200,https://pma.punjab.gov.pk/node/482
+STOP0071,Canal,Lahore,31.519317,74.326415,https://pma.punjab.gov.pk/node/483
+STOP0072,Qaddafi Stadium,Lahore,31.513092,74.328872,https://pma.punjab.gov.pk/node/483
+STOP0073,Kalma Chowk,Lahore,31.503850,74.331734,https://pma.punjab.gov.pk/node/483
+STOP0074,Barkat Market,Lahore,31.501170,74.321190,https://pma.punjab.gov.pk/node/483
+STOP0075,Campus Pull,Lahore,31.504010,74.311625,https://pma.punjab.gov.pk/node/483
+STOP0076,Gate No.4,Lahore,31.501190,74.309440,https://pma.punjab.gov.pk/node/483
+STOP0077,Haily College,Lahore,31.496560,74.305130,https://pma.punjab.gov.pk/node/483
+STOP0078,IBA Stop,Lahore,31.493440,74.302030,https://pma.punjab.gov.pk/node/483
+STOP0079,Shah Di Khoi Jinnah Hospital,Lahore,31.490480,74.298540,https://pma.punjab.gov.pk/node/483
+STOP0080,Wafaqi Colony,Lahore,31.484750,74.289950,https://pma.punjab.gov.pk/node/483
+STOP0081,Doctor Hospital,Lahore,31.480147,74.280472,https://pma.punjab.gov.pk/node/483
+STOP0082,PCSIR-1,Lahore,31.478491,74.274875,https://pma.punjab.gov.pk/node/483
+STOP0083,G-4 Johar Town,Lahore,31.477306,74.270080,https://pma.punjab.gov.pk/node/483
+STOP0084,Kot Hanjarwal,Lahore,31.476574,74.266931,https://pma.punjab.gov.pk/node/483
+STOP0085,Mughal Eye Hospital,Lahore,31.474393,74.257079,https://pma.punjab.gov.pk/node/483
+STOP0086,Canal View Gate 1,Lahore,31.472790,74.250360,https://pma.punjab.gov.pk/node/483
+STOP0087,Judicial Colony,Lahore,31.469915,74.244401,https://pma.punjab.gov.pk/node/483
+STOP0088,Thokar Niaz Baig,Lahore,31.470415,74.240941,https://pma.punjab.gov.pk/node/483
+STOP0089,Daewoo Terminal,Lahore,31.470073,74.238664,https://pma.punjab.gov.pk/node/483
+STOP0090,Haji Camp,Lahore,31.569660,74.335410,https://pma.punjab.gov.pk/node/484
+STOP0091,Police Line,Lahore,31.567410,74.335430,https://pma.punjab.gov.pk/node/484
+STOP0092,Shimla Pahari,Lahore,31.564240,74.335430,https://pma.punjab.gov.pk/node/484
+STOP0093,Shimla Pahari-2,Lahore,31.563690,74.335400,https://pma.punjab.gov.pk/node/484
+STOP0094,Aiwan-e-Iqbal,Lahore,31.560750,74.329780,https://pma.punjab.gov.pk/node/484
+STOP0095,Charing Cross,Lahore,31.559610,74.323965,https://pma.punjab.gov.pk/node/484
+STOP0096,Ganga Ram Hospital,Lahore,31.555040,74.320950,https://pma.punjab.gov.pk/node/484
+STOP0097,Waris Road,Lahore,31.551680,74.318840,https://pma.punjab.gov.pk/node/484
+STOP0098,Qartaba Chowk,Lahore,31.548302,74.315350,https://pma.punjab.gov.pk/node/484
+STOP0099,Chuburji,Lahore,31.552140,74.302644,https://pma.punjab.gov.pk/node/484
+STOP0100,Wahdat Road Station,Lahore,31.495122,74.263739,https://pma.punjab.gov.pk/node/485
+STOP0101,Multan Chungi,Lahore,31.496210,74.264870,https://pma.punjab.gov.pk/node/485
+STOP0102,Elephant Link Road,Lahore,31.497600,74.269920,https://pma.punjab.gov.pk/node/485
+STOP0103,Mustafa Town,Lahore,31.499110,74.274090,https://pma.punjab.gov.pk/node/485
+STOP0104,Karim Block Market,Lahore,31.501700,74.281170,https://pma.punjab.gov.pk/node/485
+STOP0105,Sikandar Block,Lahore,31.503491,74.286306,https://pma.punjab.gov.pk/node/485
+STOP0106,Raza Block,Lahore,31.504710,74.289950,https://pma.punjab.gov.pk/node/485
+STOP0107,PU Examination Hall,Lahore,31.505560,74.292070,https://pma.punjab.gov.pk/node/485
+STOP0108,Science College,Lahore,31.507360,74.296130,https://pma.punjab.gov.pk/node/485
+STOP0109,Bhekewal Morr,Lahore,31.509880,74.302825,https://pma.punjab.gov.pk/node/485
+STOP0110,Wahdat Colony,Lahore,31.511890,74.305410,https://pma.punjab.gov.pk/node/485
+STOP0111,School Stop,Lahore,31.513199,74.307879,https://pma.punjab.gov.pk/node/485
+STOP0112,Bank Stop,Lahore,31.514660,74.311030,https://pma.punjab.gov.pk/node/485
+STOP0113,Kot Naqsha Stop,Lahore,31.516730,74.315340,https://pma.punjab.gov.pk/node/485
+STOP0114,Karma Abad,Lahore,31.518180,74.318380,https://pma.punjab.gov.pk/node/485
+STOP0115,Aab Para Market,Lahore,31.520150,74.321130,https://pma.punjab.gov.pk/node/485
+STOP0116,Rehman Pura,Lahore,31.523866,74.323701,https://pma.punjab.gov.pk/node/485
+STOP0117,Ichara,Lahore,31.531700,74.321300,https://pma.punjab.gov.pk/node/485
+STOP0118,Shama,Lahore,31.539100,74.319100,https://pma.punjab.gov.pk/node/485
+STOP0119,LOS,Lahore,31.542410,74.317620,https://pma.punjab.gov.pk/node/485
+STOP0120,Main Market Gulberg,Lahore,31.524410,74.346410,https://pma.punjab.gov.pk/node/486
+STOP0121,McDonald's 1,Lahore,31.527400,74.349900,https://pma.punjab.gov.pk/node/486
+STOP0122,Siddique Trade Center,Lahore,31.530929,74.352051,https://pma.punjab.gov.pk/node/486
+STOP0123,McDonalds 2,Lahore,31.527300,74.350240,https://pma.punjab.gov.pk/node/486
+STOP0124,Main Market-2,Lahore,31.522750,74.347850,https://pma.punjab.gov.pk/node/486
+STOP0125,Mini Market,Lahore,31.520998,74.346799,https://pma.punjab.gov.pk/node/486
+STOP0126,Hafeez Center,Lahore,31.516100,74.344000,https://pma.punjab.gov.pk/node/486
+STOP0127,Liberty Chowk,Lahore,31.510882,74.341290,https://pma.punjab.gov.pk/node/486
+STOP0128,Center Point,Lahore,31.506754,74.337145,https://pma.punjab.gov.pk/node/486
+STOP0129,PU Campus,Lahore,31.505640,74.309600,https://pma.punjab.gov.pk/node/486
+STOP0130,Shaikh Zaid Hospital,Lahore,31.506600,74.308200,https://pma.punjab.gov.pk/node/486
+STOP0131,Pilot School,Lahore,31.510190,74.301160,https://pma.punjab.gov.pk/node/486
+STOP0132,Farooq Hospital,Lahore,31.512560,74.299170,https://pma.punjab.gov.pk/node/486
+STOP0133,Gulshan-E-Iqbal,Lahore,31.515880,74.295190,https://pma.punjab.gov.pk/node/486
+STOP0134,Dubai Chowk,Lahore,31.519340,74.291190,https://pma.punjab.gov.pk/node/486
+STOP0135,Flat Stop,Lahore,31.521600,74.290240,https://pma.punjab.gov.pk/node/486
+STOP0136,Kali Khthi Stop,Lahore,31.524520,74.287980,https://pma.punjab.gov.pk/node/486
+STOP0137,Scheme Morr,Lahore,31.525380,74.284280,https://pma.punjab.gov.pk/node/486
+STOP0138,Grand Battery Stop,Lahore,31.528400,74.284800,https://pma.punjab.gov.pk/node/486
+STOP0139,Chowk Yateem Khana,Lahore,31.532480,74.285950,https://pma.punjab.gov.pk/node/486
+STOP0140,City Bus Stand,Lahore,31.533740,74.282620,https://pma.punjab.gov.pk/node/486
+STOP0141,Shezan Factory,Lahore,31.534960,74.279280,https://pma.punjab.gov.pk/node/486
+STOP0142,Niazi Adda,Lahore,31.536840,74.273070,https://pma.punjab.gov.pk/node/486
+STOP0143,Bilal Daewoo,Lahore,31.537180,74.271580,https://pma.punjab.gov.pk/node/486
+STOP0144,Babu Sabu,Lahore,31.538320,74.266810,https://pma.punjab.gov.pk/node/486
+STOP0145,PAF Market,Lahore,31.519160,74.381480,https://pma.punjab.gov.pk/node/487
+STOP0146,Telephone Exchange,Lahore,31.521870,74.380620,https://pma.punjab.gov.pk/node/487
+STOP0147,Girja Chowk,Lahore,31.523000,74.379150,https://pma.punjab.gov.pk/node/487
+STOP0148,Alla-Ud-Din Road,Lahore,31.525560,74.379280,https://pma.punjab.gov.pk/node/487
+STOP0149,Afshan Chowk,Lahore,31.527030,74.379330,https://pma.punjab.gov.pk/node/487
+STOP0150,Rahat Bakery,Lahore,31.529930,74.375460,https://pma.punjab.gov.pk/node/487
+STOP0151,Fortress Stadium,Lahore,31.530670,74.364770,https://pma.punjab.gov.pk/node/487
+STOP0152,Mian Mir,Lahore,31.537740,74.356500,https://pma.punjab.gov.pk/node/487
+STOP0153,GymKhana,Lahore,31.540600,74.353340,https://pma.punjab.gov.pk/node/487
+STOP0154,Canal Bridge,Lahore,31.542560,74.351450,https://pma.punjab.gov.pk/node/487
+STOP0155,Aitchison College,Lahore,31.544740,74.348980,https://pma.punjab.gov.pk/node/487
+STOP0156,Club Road,Lahore,31.551390,74.341190,https://pma.punjab.gov.pk/node/487
+STOP0157,PC Hotel,Lahore,31.553560,74.337870,https://pma.punjab.gov.pk/node/487
+STOP0158,Governor House,Lahore,31.554610,74.334800,https://pma.punjab.gov.pk/node/487
+STOP0159,Lahore Zoo,Lahore,31.557990,74.327130,https://pma.punjab.gov.pk/node/487
+STOP0160,Regal Chowk,Lahore,31.562080,74.318850,https://pma.punjab.gov.pk/node/487
+STOP0161,GPO,Lahore,31.564400,74.315390,https://pma.punjab.gov.pk/node/487
+STOP0162,Anarkali,Lahore,31.567530,74.310810,https://pma.punjab.gov.pk/node/487
+STOP0163,PU Old Campus,Lahore,31.568810,74.308430,https://pma.punjab.gov.pk/node/487
+STOP0164,Government College University,Lahore,31.571264,74.307283,https://pma.punjab.gov.pk/node/487
+STOP0165,Nasir Bagh,Lahore,31.571753,74.305575,https://pma.punjab.gov.pk/node/487
+STOP0166,Bagrian,Lahore,31.432710,74.299750,https://pma.punjab.gov.pk/node/520
+STOP0167,Muslim Chowk,Lahore,31.435420,74.293550,https://pma.punjab.gov.pk/node/520
+STOP0168,Gondal Chowk,Lahore,31.439700,74.292490,https://pma.punjab.gov.pk/node/520
+STOP0169,Butt Chowk,Lahore,31.442970,74.294160,https://pma.punjab.gov.pk/node/520
+STOP0170,Lajhna Chowk,Lahore,31.447200,74.296390,https://pma.punjab.gov.pk/node/520
+STOP0171,UMT Stop,Lahore,31.451350,74.298369,https://pma.punjab.gov.pk/node/520
+STOP0172,Khokhar Chowk,Lahore,31.453750,74.299830,https://pma.punjab.gov.pk/node/520
+STOP0173,M. Ali Chowk,Lahore,31.459017,74.302669,https://pma.punjab.gov.pk/node/520
+STOP0174,Aslam Chowk,Lahore,31.463912,74.305278,https://pma.punjab.gov.pk/node/520
+STOP0175,Akber Chowk,Lahore,31.466704,74.306666,https://pma.punjab.gov.pk/node/520
+STOP0176,Mochipura Morr,Lahore,31.465621,74.312493,https://pma.punjab.gov.pk/node/520
+STOP0177,Model Town Link Road,Lahore,31.463966,74.316996,https://pma.punjab.gov.pk/node/520
+STOP0178,Al-Habib Stop,Lahore,31.463201,74.318911,https://pma.punjab.gov.pk/node/520
+STOP0179,Peco Morr,Lahore,31.456720,74.335250,https://pma.punjab.gov.pk/node/520
+STOP0180,Kot Lakhpat Railway Station,Lahore,31.459140,74.337370,https://pma.punjab.gov.pk/node/520
+STOP0181,Phatki,Lahore,31.464200,74.340660,https://pma.punjab.gov.pk/node/520
+STOP0182,Phatak Mandi,Lahore,31.470970,74.344200,https://pma.punjab.gov.pk/node/520
+STOP0183,Ittefaq Hospital,Lahore,31.478720,74.342110,https://pma.punjab.gov.pk/node/520
+STOP0184,Gulab Devi Hospital,Lahore,31.483370,74.340500,https://pma.punjab.gov.pk/node/520
+STOP0185,Naseerabad,Lahore,31.486150,74.339030,https://pma.punjab.gov.pk/node/520
+STOP0186,Bhabra Stop,Lahore,31.491600,74.336760,https://pma.punjab.gov.pk/node/520
+STOP0187,Model Town,Lahore,31.497640,74.334320,https://pma.punjab.gov.pk/node/520
+STOP0188,Purana Kahna,Lahore,31.351658,74.373393,https://pma.punjab.gov.pk/node/523
+STOP0189,Malik Pura,Lahore,31.356000,74.371256,https://pma.punjab.gov.pk/node/523
+STOP0190,5 Number Stop,Lahore,31.360211,74.369100,https://pma.punjab.gov.pk/node/523
+STOP0191,Railu Wali Masjid,Lahore,31.364275,74.367014,https://pma.punjab.gov.pk/node/523
+STOP0192,Kahna,Lahore,31.370011,74.365831,https://pma.punjab.gov.pk/node/523
+STOP0193,Darbar Barket Shah,Lahore,31.375441,74.365035,https://pma.punjab.gov.pk/node/523
+STOP0194,Ahlu Road,Lahore,31.379225,74.364247,https://pma.punjab.gov.pk/node/523
+STOP0195,Rehmat Park,Lahore,31.383053,74.363686,https://pma.punjab.gov.pk/node/523
+STOP0196,LDA Gol Chakar,Lahore,31.389292,74.362681,https://pma.punjab.gov.pk/node/523
+STOP0197,Gajjumata,Lahore,31.397225,74.361539,https://pma.punjab.gov.pk/node/523
+STOP0198,Masjid Ibrahim,Lahore,31.400803,74.361057,https://pma.punjab.gov.pk/node/523
+STOP0199,Dulla Khurd,Lahore,31.406391,74.360214,https://pma.punjab.gov.pk/node/523
+STOP0200,Dulam,Lahore,31.408943,74.359865,https://pma.punjab.gov.pk/node/523
+STOP0201,Yohanabad,Lahore,31.413486,74.359165,https://pma.punjab.gov.pk/node/523
+STOP0202,Nishtar Colony,Lahore,31.420750,74.358104,https://pma.punjab.gov.pk/node/523
+STOP0203,Descon Headquarters,Lahore,31.426394,74.357301,https://pma.punjab.gov.pk/node/523
+STOP0204,Attari Saroba,Lahore,31.432014,74.356453,https://pma.punjab.gov.pk/node/523
+STOP0205,Venus Housing,Lahore,31.437431,74.355682,https://pma.punjab.gov.pk/node/523
+STOP0206,Kamahan,Lahore,31.441311,74.355027,https://pma.punjab.gov.pk/node/523
+STOP0207,Chungi Metro Station,Lahore,31.449731,74.353337,https://pma.punjab.gov.pk/node/523
+STOP0208,Shoukat Town,Lahore,31.460390,74.357890,https://pma.punjab.gov.pk/node/523
+STOP0209,Naka Stop,Lahore,31.463450,74.367450,https://pma.punjab.gov.pk/node/523
+STOP0210,Chota Ishara Stop,Lahore,31.464720,74.371550,https://pma.punjab.gov.pk/node/523
+STOP0211,Sector C (Y-Block),Lahore,31.467870,74.381380,https://pma.punjab.gov.pk/node/523
+STOP0212,LESCO,Lahore,31.470290,74.389190,https://pma.punjab.gov.pk/node/523
+STOP0213,Chara Pind,Lahore,31.472350,74.392280,https://pma.punjab.gov.pk/node/523
+STOP0214,DHA Nursery,Lahore,31.473480,74.393670,https://pma.punjab.gov.pk/node/523
+STOP0215,Defence Chowk,Lahore,31.477560,74.399060,https://pma.punjab.gov.pk/node/523
+STOP0216,PSO,Lahore,31.482740,74.405860,https://pma.punjab.gov.pk/node/523
+STOP0217,Bhatta Chowk,Lahore,31.486750,74.411150,https://pma.punjab.gov.pk/node/523
+STOP0218,Arifabad,Lahore,31.491210,74.408640,https://pma.punjab.gov.pk/node/523
+STOP0219,Nadirabad,Lahore,31.494010,74.405950,https://pma.punjab.gov.pk/node/523
+STOP0220,Ali View Garden,Lahore,31.494740,74.403270,https://pma.punjab.gov.pk/node/523
+STOP0221,Cantt. Bus Stop,Lahore,31.497750,74.398560,https://pma.punjab.gov.pk/node/523
+STOP0222,Fauji Foundation,Lahore,31.498990,74.394910,https://pma.punjab.gov.pk/node/523
+STOP0223,Katchery,Lahore,31.574772,74.306629,https://pma.punjab.gov.pk/node/524
+STOP0224,Civil Secretariat,Lahore,31.568506,74.304324,https://pma.punjab.gov.pk/node/524
+STOP0225,M.A.O College,Lahore,31.562457,74.305640,https://pma.punjab.gov.pk/node/524
+STOP0226,Anarkali Metro Station,Lahore,,,https://pma.punjab.gov.pk/node/524
+STOP0227,Janazgah,Lahore,31.554253,74.311352,https://pma.punjab.gov.pk/node/524
+STOP0228,Mazang,Lahore,31.546543,74.317666,https://pma.punjab.gov.pk/node/524
+STOP0229,Roznama Pakistan,Lahore,31.544162,74.320832,https://pma.punjab.gov.pk/node/524
+STOP0230,Lahore College,Lahore,31.542909,74.328266,https://pma.punjab.gov.pk/node/524
+STOP0231,Services Hospital,Lahore,31.541062,74.333649,https://pma.punjab.gov.pk/node/524
+STOP0232,Punjab Institute of Cardiology,Lahore,31.539810,74.334927,https://pma.punjab.gov.pk/node/524
+STOP0233,Kinnaird College,Lahore,31.537064,74.338987,https://pma.punjab.gov.pk/node/524
+STOP0234,Zafar Ali Road,Lahore,31.534921,74.344871,https://pma.punjab.gov.pk/node/524
+STOP0235,McDonald,Lahore,31.527304,74.350244,https://pma.punjab.gov.pk/node/524
+STOP0236,Main Market,Lahore,31.522745,74.347848,https://pma.punjab.gov.pk/node/524
+STOP0237,Firdous Market,Lahore,31.503022,74.349419,https://pma.punjab.gov.pk/node/524
+STOP0238,Cavalry Road T-Stop,Lahore,31.502552,74.367725,https://pma.punjab.gov.pk/node/524
+STOP0239,Model Town Morr,Lahore,31.496164,74.332767,https://pma.punjab.gov.pk/node/551
+STOP0240,Pakistani Chowk,Lahore,31.491576,74.330113,https://pma.punjab.gov.pk/node/551
+STOP0241,Bank Square C-Block,Lahore,31.489163,74.327137,https://pma.punjab.gov.pk/node/551
+STOP0242,Ladies Club D-Block,Lahore,31.487752,74.322288,https://pma.punjab.gov.pk/node/551
+STOP0243,Girls College E-Block,Lahore,31.484593,74.320865,https://pma.punjab.gov.pk/node/551
+STOP0244,F-Block,Lahore,31.481569,74.322199,https://pma.punjab.gov.pk/node/551
+STOP0245,Club Chowk,Lahore,31.480128,74.323774,https://pma.punjab.gov.pk/node/551
+STOP0246,Quid-e-Azam Law College,Lahore,31.477134,74.322115,https://pma.punjab.gov.pk/node/551
+STOP0247,Shaheed Chowk,Lahore,31.472996,74.319879,https://pma.punjab.gov.pk/node/551
+STOP0248,Pace Shopping Centre,Lahore,31.470462,74.318490,https://pma.punjab.gov.pk/node/551
+STOP0249,McDonald's,Lahore,31.466186,74.316105,https://pma.punjab.gov.pk/node/551
+STOP0250,Akbar Chowk,Lahore,31.467623,74.306644,https://pma.punjab.gov.pk/node/551
+STOP0251,Shouq Chowk,Lahore,31.470294,74.303296,https://pma.punjab.gov.pk/node/551
+STOP0252,Allah-Hoo Chowk,Lahore,31.468802,74.297997,https://pma.punjab.gov.pk/node/551
+STOP0253,Aleem Dar Stadium,Lahore,31.464627,74.290148,https://pma.punjab.gov.pk/node/551
+STOP0254,LDA Plaza,Lahore,31.460264,74.283151,https://pma.punjab.gov.pk/node/551
+STOP0255,Shadiwal Chowk,Lahore,31.455623,74.276917,https://pma.punjab.gov.pk/node/551
+STOP0256,Shaukat Khanum Hospital,Lahore,31.449573,74.270295,https://pma.punjab.gov.pk/node/551
+STOP0257,Wapda Town Gate 1 Stop 1,Lahore,31.439993,74.266752,https://pma.punjab.gov.pk/node/551
+STOP0258,Wapda Town Gate 1 Stop 2,Lahore,31.440953,74.267095,https://pma.punjab.gov.pk/node/551
+STOP0259,UCP,Lahore,31.448952,74.268963,https://pma.punjab.gov.pk/node/551
+STOP0260,PCSIR,Lahore,31.452454,74.267952,https://pma.punjab.gov.pk/node/551
+STOP0261,Abdalian Society,Lahore,31.456255,74.266921,https://pma.punjab.gov.pk/node/551
+STOP0262,Ayub Chowk,Lahore,31.458793,74.264034,https://pma.punjab.gov.pk/node/551
+STOP0263,Expo Centre,Lahore,31.462944,74.258068,https://pma.punjab.gov.pk/node/551
+STOP0264,Shan Chowk,Lahore,31.465768,74.252419,https://pma.punjab.gov.pk/node/551
+STOP0265,Ring Chowk,Lahore,31.471225,74.247918,https://pma.punjab.gov.pk/node/551
+STOP0266,Ali Murtaza Associates,Lahore,31.396529,74.368895,https://pma.punjab.gov.pk/node/552
+STOP0267,Nishat Mills,Lahore,31.399272,74.381130,https://pma.punjab.gov.pk/node/552
+STOP0268,Shafi Reso,Lahore,31.400078,74.389923,https://pma.punjab.gov.pk/node/552
+STOP0269,Ghankar Stop,Lahore,31.400318,74.393789,https://pma.punjab.gov.pk/node/552
+STOP0270,Bhuller Village,Lahore,31.400882,74.395850,https://pma.punjab.gov.pk/node/552
+STOP0271,Transport Housing Society,Lahore,31.401502,74.397881,https://pma.punjab.gov.pk/node/552
+STOP0272,Hush Puppies,Lahore,31.401736,74.402017,https://pma.punjab.gov.pk/node/552
+STOP0273,Raja Bhula Pull,Lahore,31.402154,74.406288,https://pma.punjab.gov.pk/node/552
+STOP0274,Nishat Dying Mills,Lahore,31.402864,74.414430,https://pma.punjab.gov.pk/node/552
+STOP0275,Deo Pull,Lahore,31.406944,74.419122,https://pma.punjab.gov.pk/node/552
+STOP0276,Nishat Apparel,Lahore,31.415121,74.430539,https://pma.punjab.gov.pk/node/552
+STOP0277,Sora Stop,Lahore,31.417986,74.435111,https://pma.punjab.gov.pk/node/552
+STOP0278,Thethar Stop,Lahore,31.423175,74.456763,https://pma.punjab.gov.pk/node/552
+STOP0279,Avicina Hospital,Lahore,31.433269,74.467790,https://pma.punjab.gov.pk/node/552
+STOP0280,Dera Chahal,Lahore,31.440510,74.468116,https://pma.punjab.gov.pk/node/552
+STOP0281,Elite School,Lahore,31.445718,74.462234,https://pma.punjab.gov.pk/node/552
+STOP0282,Workshop Stop 1,Lahore,31.450769,74.452181,https://pma.punjab.gov.pk/node/552
+STOP0283,School Stop Lidher 1,Lahore,31.454489,74.446906,https://pma.punjab.gov.pk/node/552
+STOP0284,Shehbaz Sharif Hospital 1,Lahore,31.457064,74.443197,https://pma.punjab.gov.pk/node/552
+STOP0285,Lidher 1,Lahore,31.459053,74.439733,https://pma.punjab.gov.pk/node/552
+STOP0286,Nawaz Sharif Interchange,Lahore,31.466128,74.432300,https://pma.punjab.gov.pk/node/552
+STOP0287,Lidher 2,Lahore,31.458925,74.439764,https://pma.punjab.gov.pk/node/552
+STOP0288,Shehbaz Sharif Hospital 2,Lahore,31.456947,74.443239,https://pma.punjab.gov.pk/node/552
+STOP0289,School Stop Lidher 2,Lahore,31.454347,74.446950,https://pma.punjab.gov.pk/node/552
+STOP0290,Workshop Stop 2,Lahore,31.451036,74.451400,https://pma.punjab.gov.pk/node/552
+STOP0291,Ramzan Nursery 1,Lahore,31.448186,74.457947,https://pma.punjab.gov.pk/node/552
+STOP0292,PKLI-2,Lahore,31.456983,74.463125,https://pma.punjab.gov.pk/node/552
+STOP0293,Bankers Society,Lahore,31.435214,74.472147,https://pma.punjab.gov.pk/node/552
+STOP0294,Karbath,Lahore,31.426294,74.478667,https://pma.punjab.gov.pk/node/552
+STOP0295,Total Pump,Lahore,31.417469,74.484339,https://pma.punjab.gov.pk/node/552
+STOP0296,Heir Masjid Ghosia,Lahore,31.410717,74.489367,https://pma.punjab.gov.pk/node/552
+STOP0297,Heir,Lahore,,,https://pma.punjab.gov.pk/node/552
+STOP0298,Heir Adda,Lahore,31.405239,74.492853,https://pma.punjab.gov.pk/node/552
+STOP0299,Rangers Wing Headquarter,Lahore,31.393581,74.499472,https://pma.punjab.gov.pk/node/552
+STOP0300,Shahdara,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0301,Jiya Musa,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0302,25 Number Stop,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0303,Rustam Sohrab Factory,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0304,Yousuf Park,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0305,Baigum Kot,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0306,Mairaj Park,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0307,Chungi Stop,Lahore,,,https://pma.punjab.gov.pk/node/553
+STOP0308,Nain Sukh,Lahore,31.601958,74.252500,https://pma.punjab.gov.pk/node/553
+STOP0309,Dosako Chowk,Lahore,31.617947,74.247722,https://pma.punjab.gov.pk/node/553
+STOP0310,Kot Abdul Malik,Lahore,31.622261,74.239569,https://pma.punjab.gov.pk/node/553
+STOP0311,Main Bazar Kot Abdul Malik,Lahore,31.624503,74.233411,https://pma.punjab.gov.pk/node/553
+STOP0312,Al-Wahab Garden,Lahore,31.628206,74.223031,https://pma.punjab.gov.pk/node/553
+STOP0313,Motorway City,Lahore,31.633975,74.207647,https://pma.punjab.gov.pk/node/553
+STOP0314,Javed Nagar,Lahore,31.639386,74.194167,https://pma.punjab.gov.pk/node/553
+STOP0315,Fazal Town,Lahore,31.640550,74.191311,https://pma.punjab.gov.pk/node/553
+STOP0316,Mandiali Toll Plaza,Lahore,31.643756,74.183364,https://pma.punjab.gov.pk/node/553

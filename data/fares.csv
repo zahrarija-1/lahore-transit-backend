@@ -1,0 +1,10 @@
+service_type,fare_rule,fare_rs,currency,source_url,source_status
+Lahore Metrobus System,Single journey,30,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Lahore Feeder Routes - Phase I,Single journey,20,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Lahore Feeder Routes - Phase I,Two journeys,25,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Lahore Feeder Routes - Phase I,Three journeys,30,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Orange Line Metro Train,0-4 km,25,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Orange Line Metro Train,>4-8 km,30,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Orange Line Metro Train,>8-12 km,35,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Orange Line Metro Train,>12-16 km,40,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy
+Orange Line Metro Train,>16-30 km,45,PKR,https://pma.punjab.gov.pk/,Official PMA fare policy

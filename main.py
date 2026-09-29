@@ -150,30 +150,20 @@ def health():
 )
 def chat(request: ChatRequest):
 
-    # Create a new session if needed
-    session_id = request.session_id
-
-    if not session_id:
-        session_id = session.create_session()
-
-    # Save user message
-    session.add_message(
-        session_id=session_id,
-        role="user",
-        content=request.message,
-    )
-
-    # Get previous conversation
-    history = session.get_history(
-        session_id
-    )
+    # Use the app-provided session ID.
+    # If none is provided, use the default session.
+    session_id = request.session_id or "default"
 
     try:
+        # IMPORTANT:
+        # assistant.pipeline.answer() expects:
+        # answer(message, session_id)
         result = answer(
             request.message,
-            history=history,
+            session_id=session_id,
         )
 
+        # Handle dictionary responses
         if isinstance(result, dict):
             response_text = (
                 result.get("response")
@@ -181,6 +171,8 @@ def chat(request: ChatRequest):
                 or result.get("message")
                 or str(result)
             )
+
+        # Handle normal string responses
         else:
             response_text = str(result)
 
@@ -194,13 +186,6 @@ def chat(request: ChatRequest):
             f"Chat processing error: {exc}"
         )
 
-    # Save assistant response
-    session.add_message(
-        session_id=session_id,
-        role="assistant",
-        content=response_text,
-    )
-
     return ChatResponse(
         response=response_text,
         session_id=session_id,
@@ -212,13 +197,10 @@ def chat(request: ChatRequest):
 # ============================================================
 
 @app.post("/chat/reset")
-def reset_chat(
-    session_id: str,
-):
+def reset_chat(session_id: str):
+
     try:
-        session.clear_session(
-            session_id
-        )
+        session.reset(session_id)
 
         return {
             "success": True,

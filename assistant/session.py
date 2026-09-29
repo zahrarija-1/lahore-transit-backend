@@ -39,8 +39,8 @@ def add_turn(session_id, role, text):
     })
 
 
-def add_message(session_id, role, text):
-    add_turn(session_id, role, text)
+def add_message(session_id, role, content):
+    add_turn(session_id, role, content)
 
 
 def history_as_text(session_id):

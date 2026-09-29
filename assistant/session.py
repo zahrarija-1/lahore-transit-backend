@@ -43,8 +43,12 @@ def add_message(session_id, role, content):
     add_turn(session_id, role, content)
 
 
+def get_history(session_id):
+    return list(get_session(session_id)["history"])
+
+
 def history_as_text(session_id):
-    turns = get_session(session_id)["history"]
+    turns = get_history(session_id)
 
     if not turns:
         return "(no previous messages)"

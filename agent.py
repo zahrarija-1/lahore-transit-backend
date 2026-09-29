@@ -709,3 +709,5 @@ def clean_response(answer):
     )
 
     return answer.strip()
+def answer(question, history=None, **kwargs):
+    return transit_agent(question)

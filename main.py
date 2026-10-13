@@ -14,7 +14,7 @@ from assistant.pipeline import answer
 from routers import auth_routes
 from routers import transport_routes
 from routers import nearby_routes
-
+from routers import budget_routes
 
 # ============================================================
 # Application Lifespan
@@ -84,7 +84,7 @@ app.add_middleware(
 app.include_router(auth_routes.router)
 app.include_router(transport_routes.router)
 app.include_router(nearby_routes.router)
-
+app.include_router(budget_routes.router)
 
 # ============================================================
 # Chat Schemas

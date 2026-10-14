@@ -18,19 +18,17 @@ from datetime import datetime, timedelta, timezone
 import bcrypt
 import jwt
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-
 from config import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
     JWT_ALGORITHM,
     JWT_SECRET_KEY,
 )
-
+from supabase_client import supabase, supabase_admin
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 DB_PATH = "transit_ai.db"
 
 # Tells FastAPI to read the "Authorization: Bearer <token>" header.
-security = HTTPBearer()
-
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 def get_connection():
     return sqlite3.connect(DB_PATH)
@@ -119,133 +117,86 @@ def decode_access_token(token):
         )
 
 
+
 # ============================================================
-# USER DATABASE QUERIES
+# USER DATABASE QUERIES - SUPABASE AUTH
 # ============================================================
 
-def get_user_by_email(email):
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT
-            user_id,
-            email,
-            password_hash,
-            full_name,
-            role,
-            is_active
-        FROM users
-        WHERE email = ?
-    """, (email,))
-
-    row = cursor.fetchone()
-    conn.close()
-
-    if not row:
+def _format_user(auth_user):
+    if auth_user is None:
         return None
 
+    metadata = auth_user.user_metadata or {}
+
     return {
-        "user_id": row[0],
-        "email": row[1],
-        "password_hash": row[2],
-        "full_name": row[3],
-        "role": row[4],
-        "is_active": bool(row[5])
+        "user_id": str(auth_user.id),
+        "email": auth_user.email,
+        "full_name": metadata.get("full_name", ""),
+        "role": metadata.get("role", "user"),
+        "is_active": True,
+        "created_at": str(auth_user.created_at or ""),
     }
+
+
 
 
 def get_user_by_id(user_id):
+    try:
+        response = supabase_admin.auth.admin.get_user_by_id(str(user_id))
 
-    conn = get_connection()
-    cursor = conn.cursor()
+        if response.user is None:
+            return None
 
-    cursor.execute("""
-        SELECT
-            user_id,
-            email,
-            full_name,
-            role,
-            is_active,
-            created_at
-        FROM users
-        WHERE user_id = ?
-    """, (user_id,))
+        return _format_user(response.user)
 
-    row = cursor.fetchone()
-    conn.close()
+    except Exception as exc:
+        print(
+            "SUPABASE USER LOOKUP ERROR:",
+            type(exc).__name__,
+            str(exc)
+        )
+        raise HTTPException(
+            status_code=503,
+            detail="Unable to verify user account."
+        ) from exc
 
-    if not row:
-        return None
-
-    return {
-        "user_id": row[0],
-        "email": row[1],
-        "full_name": row[2],
-        "role": row[3],
-        "is_active": bool(row[4]),
-        "created_at": row[5]
-    }
-
+def get_user_by_email(email):
+    # Password authentication is handled by Supabase Auth.
+    # Do not retrieve password hashes through this function.
+    return None
 
 def create_user(email, password, full_name):
-    """
-    Insert a new user.
-
-    Returns None if the email is already registered. The UNIQUE
-    constraint on the email column is what actually prevents the
-    duplicate, so two simultaneous signups cannot both succeed.
-    """
-
-    user_id = str(uuid.uuid4())
-    timestamp = now_iso()
-
-    conn = get_connection()
-    cursor = conn.cursor()
-
     try:
-        cursor.execute("""
-            INSERT INTO users (
-                user_id,
-                email,
-                password_hash,
-                full_name,
-                role,
-                is_active,
-                created_at,
-                updated_at
+        response = supabase.auth.sign_up({
+            "email": email,
+            "password": password,
+            "options": {
+                "data": {
+                    "full_name": full_name,
+                    "role": "user"
+                }
+            }
+        })
+
+        if response.user is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Unable to create account."
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        """, (
-            user_id,
-            email,
-            hash_password(password),
-            full_name,
-            "user",
-            1,
-            timestamp,
-            timestamp
-        ))
-
-        conn.commit()
-
-    except sqlite3.IntegrityError:
-        conn.close()
-        return None
-
-    finally:
-        if conn:
-            conn.close()
-
-    return {
-        "user_id": user_id,
-        "email": email,
-        "full_name": full_name,
-        "role": "user"
-    }
 
 
+        return _format_user(response.user)
+
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=400,
+            detail="Account registration failed. Check your email or try again."
+        ) from exc
+
+
+security = HTTPBearer()
 # ============================================================
 # LOGIN REQUIRED DEPENDENCY
 # ============================================================

@@ -63,47 +63,53 @@ def register(request: RegisterRequest):
     }
 
 
+
 @router.post("/login", response_model=TokenResponse)
 def login(request: LoginRequest):
-    """Check the password and return a token."""
-
     email = request.email.lower().strip()
 
-    user = get_user_by_email(email)
+    try:
+        from supabase_client import supabase
 
-    # The same message is returned whether the email is unknown or
-    # the password is wrong. Otherwise anyone could use this endpoint
-    # to discover which email addresses are registered.
-    if not user or not verify_password(
-        request.password,
-        user["password_hash"]
-    ):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password."
-        )
+        response = supabase.auth.sign_in_with_password({
+            "email": email,
+            "password": request.password
+        })
 
-    if not user["is_active"]:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="This account has been disabled."
-        )
+        if response.user is None or response.session is None:
+            raise HTTPException(
+                status_code=401,
+                detail="Incorrect email or password."
+            )
 
-    token = create_access_token(
-        user["user_id"],
-        user["email"]
-    )
+        metadata = response.user.user_metadata or {}
 
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": {
-            "user_id": user["user_id"],
-            "email": user["email"],
-            "full_name": user["full_name"],
-            "role": user["role"]
+        user = {
+            "user_id": str(response.user.id),
+            "email": response.user.email,
+            "full_name": metadata.get("full_name", ""),
+            "role": "user"
         }
-    }
+
+        token = create_access_token(
+            user["user_id"],
+            user["email"]
+        )
+
+        return {
+            "access_token": token,
+            "token_type": "bearer",
+            "user": user
+        }
+
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect email or password."
+        ) from exc
+
 
 
 @router.get("/me", response_model=UserResponse)

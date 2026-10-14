@@ -1,7 +1,7 @@
 import csv
 import logging
 from pathlib import Path
-
+from supabase_client import supabase_admin
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
@@ -84,7 +84,7 @@ def get_fare(route, fare_rows):
 
 def save_record(table, data):
     response = (
-        get_supabase()
+        supabase_admin
         .table(table)
         .insert(data)
         .execute()
@@ -253,7 +253,7 @@ def budget_history(
     user_id = str(user["user_id"])
 
     try:
-        supabase = get_supabase()
+        supabase = supabase_admin
 
         return {
             "budgets": (

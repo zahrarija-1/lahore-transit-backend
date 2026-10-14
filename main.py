@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from routers import trip_routes
 from contextlib import asynccontextmanager
 from typing import Optional
 
@@ -85,7 +85,7 @@ app.include_router(auth_routes.router)
 app.include_router(transport_routes.router)
 app.include_router(nearby_routes.router)
 app.include_router(budget_routes.router)
-
+app.include_router(trip_routes.router)
 # ============================================================
 # Chat Schemas
 # ============================================================

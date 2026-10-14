@@ -13,7 +13,6 @@ from pydantic import BaseModel
 
 from assistant import session
 from assistant.graph_builder import get_graph
-from assistant.pipeline import answer
 
 from routers import auth_routes
 from routers import transport_routes
@@ -36,47 +35,9 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Load the transit graph when Render starts the backend.
-    Log startup progress to help diagnose deployment delays.
-    """
-
-    logger.info("========================================")
-    logger.info("Transit AI Backend Starting...")
-    logger.info("========================================")
-
-    start_time = time.monotonic()
-
-    try:
-        logger.info("Starting transit graph loading...")
-
-        graph = get_graph(force_reload=True)
-
-        elapsed = time.monotonic() - start_time
-
-        logger.info("Transit graph loaded successfully")
-        logger.info("Graph loading time: %.2f seconds", elapsed)
-        logger.info("Stops loaded: %s", len(graph.stop_name))
-        logger.info("Routes loaded: %s", len(graph.route_info))
-        logger.info(
-            "Stops with coordinates: %s",
-            len(graph.stop_coordinates),
-        )
-
-    except Exception:
-        logger.exception("Transit graph loading error")
-
-    logger.info(
-        "Backend startup initialization completed in %.2f seconds",
-        time.monotonic() - start_time,
-    )
-
-    logger.info("========================================")
-    logger.info("Transit AI Backend Startup Complete")
-    logger.info("========================================")
-
+    """Start HTTP promptly; graph loads on first request that needs it."""
+    logger.info("Transit AI startup: graph loading deferred until needed")
     yield
-
     logger.info("Transit AI Backend Shutting Down")
 
 
@@ -188,6 +149,9 @@ def chat(request: ChatRequest):
     session_id = request.session_id or "default"
 
     try:
+        # Load assistant modules only when chat is actually requested.
+        from assistant.pipeline import answer
+
         result = answer(
             request.message,
             session_id=session_id,

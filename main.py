@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import time
 import logging
-
+from routers import traveller_chat_routes
 from contextlib import asynccontextmanager
 from typing import Optional
 
@@ -78,7 +78,7 @@ app.include_router(transport_routes.router)
 app.include_router(nearby_routes.router)
 app.include_router(budget_routes.router)
 app.include_router(trip_routes.router)
-
+app.include_router(traveller_chat_routes.router)
 
 # ============================================================
 # Chat Schemas

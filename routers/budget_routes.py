@@ -1,5 +1,5 @@
-
 import csv
+import logging
 from pathlib import Path
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -8,6 +8,8 @@ from pydantic import BaseModel, Field
 from auth import get_current_user
 from db_tools import route_search
 from supabase_client import get_supabase
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(
     prefix="/budget-ai",
@@ -31,7 +33,7 @@ class BudgetRequest(BaseModel):
 
 
 def load_fares():
-    with open(FARES_FILE, encoding="utf-8-sig") as file:
+    with open(FARES_FILE, encoding="utf-8-sig", newline="") as file:
         return list(csv.DictReader(file))
 
 
@@ -108,11 +110,13 @@ def recommend(
     user_id = str(user["user_id"])
 
     try:
+        logger.info("Budget AI: searching routes")
         routes = route_search(
             request.origin.strip(),
             request.destination.strip()
         )
 
+        logger.info("Budget AI: loading fares from %s", FARES_FILE)
         fares = load_fares()
         journeys = 2 if request.return_trip else 1
 
@@ -187,12 +191,14 @@ def recommend(
                 "No direct route with a calculable fare found."
             )
 
+        logger.info("Budget AI: saving travel budget")
         budget = save_record("travel_budgets", {
             "user_id": user_id,
             "monthly_budget": request.monthly_budget,
             "travel_days": request.travel_days
         })
 
+        logger.info("Budget AI: saving daily commute")
         commute = save_record("daily_commutes", {
             "user_id": user_id,
             "budget_id": budget["id"],
@@ -203,6 +209,7 @@ def recommend(
         })
 
         if best:
+            logger.info("Budget AI: saving recommendation")
             save_record("budget_recommendations", {
                 "user_id": user_id,
                 "commute_id": commute["id"],
@@ -216,6 +223,7 @@ def recommend(
                 "ai_explanation": reply
             })
 
+        logger.info("Budget AI: recommendation completed successfully")
         return {
             "reply": reply,
             "monthly_budget": request.monthly_budget,
@@ -230,11 +238,12 @@ def recommend(
 
     except HTTPException:
         raise
-    except Exception as exc:
+    except Exception:
+        logger.exception("Budget AI recommendation failed")
         raise HTTPException(
             status_code=503,
             detail="Budget service unavailable"
-        ) from exc
+        )
 
 
 @router.get("/history")
@@ -273,8 +282,9 @@ def budget_history(
             )
         }
 
-    except Exception as exc:
+    except Exception:
+        logger.exception("Budget AI history failed")
         raise HTTPException(
             status_code=503,
             detail="Budget history unavailable"
-        ) from exc
+        )

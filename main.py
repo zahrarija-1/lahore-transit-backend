@@ -1,5 +1,9 @@
+
 from __future__ import annotations
-from routers import trip_routes
+
+import time
+import logging
+
 from contextlib import asynccontextmanager
 from typing import Optional
 
@@ -15,6 +19,16 @@ from routers import auth_routes
 from routers import transport_routes
 from routers import nearby_routes
 from routers import budget_routes
+from routers import trip_routes
+
+
+# ============================================================
+# Logging Configuration
+# ============================================================
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 # ============================================================
 # Application Lifespan
@@ -24,29 +38,46 @@ from routers import budget_routes
 async def lifespan(app: FastAPI):
     """
     Load the transit graph when Render starts the backend.
+    Log startup progress to help diagnose deployment delays.
     """
 
+    logger.info("========================================")
+    logger.info("Transit AI Backend Starting...")
+    logger.info("========================================")
+
+    start_time = time.monotonic()
+
     try:
+        logger.info("Starting transit graph loading...")
+
         graph = get_graph(force_reload=True)
 
-        print("========================================")
-        print("Transit AI Backend Started")
-        print("========================================")
-        print(f"Stops loaded: {len(graph.stop_name)}")
-        print(f"Routes loaded: {len(graph.route_info)}")
-        print(
-            f"Stops with coordinates: "
-            f"{len(graph.stop_coordinates)}"
-        )
-        print("========================================")
+        elapsed = time.monotonic() - start_time
 
-    except Exception as exc:
-        print("========================================")
-        print("Transit graph loading error")
-        print(f"Error: {exc}")
-        print("========================================")
+        logger.info("Transit graph loaded successfully")
+        logger.info("Graph loading time: %.2f seconds", elapsed)
+        logger.info("Stops loaded: %s", len(graph.stop_name))
+        logger.info("Routes loaded: %s", len(graph.route_info))
+        logger.info(
+            "Stops with coordinates: %s",
+            len(graph.stop_coordinates),
+        )
+
+    except Exception:
+        logger.exception("Transit graph loading error")
+
+    logger.info(
+        "Backend startup initialization completed in %.2f seconds",
+        time.monotonic() - start_time,
+    )
+
+    logger.info("========================================")
+    logger.info("Transit AI Backend Startup Complete")
+    logger.info("========================================")
 
     yield
+
+    logger.info("Transit AI Backend Shutting Down")
 
 
 # ============================================================
@@ -86,6 +117,8 @@ app.include_router(transport_routes.router)
 app.include_router(nearby_routes.router)
 app.include_router(budget_routes.router)
 app.include_router(trip_routes.router)
+
+
 # ============================================================
 # Chat Schemas
 # ============================================================
@@ -133,6 +166,8 @@ def health():
         }
 
     except Exception as exc:
+        logger.exception("Health check graph error")
+
         return {
             "status": "degraded",
             "service": "Transit AI API",
@@ -150,20 +185,14 @@ def health():
 )
 def chat(request: ChatRequest):
 
-    # Use the app-provided session ID.
-    # If none is provided, use the default session.
     session_id = request.session_id or "default"
 
     try:
-        # IMPORTANT:
-        # assistant.pipeline.answer() expects:
-        # answer(message, session_id)
         result = answer(
             request.message,
             session_id=session_id,
         )
 
-        # Handle dictionary responses
         if isinstance(result, dict):
             response_text = (
                 result.get("response")
@@ -171,19 +200,15 @@ def chat(request: ChatRequest):
                 or result.get("message")
                 or str(result)
             )
-
-        # Handle normal string responses
         else:
             response_text = str(result)
 
-    except Exception as exc:
+    except Exception:
+        logger.exception("Chat processing error")
+
         response_text = (
             "Sorry, I could not process your request "
             "right now."
-        )
-
-        print(
-            f"Chat processing error: {exc}"
         )
 
     return ChatResponse(
@@ -209,6 +234,8 @@ def reset_chat(session_id: str):
         }
 
     except Exception as exc:
+        logger.exception("Chat reset error")
+
         return {
             "success": False,
             "session_id": session_id,

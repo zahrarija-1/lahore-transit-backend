@@ -68,7 +68,11 @@ def get_fare(route, fare_rows):
         label = row.get("service_type", "").lower()
         rule = row.get("fare_rule", "").lower()
 
-        if service not in label:
+        # CSV uses "Lahore Metrobus System" and "Lahore Feeder Routes".
+        # Match normalized service names without changing stored fare values.
+        if service == "metrobus" and not ("metrobus" in label or "metro bus" in label):
+            continue
+        if service == "feeder" and not ("feeder" in label or "speedo" in label):
             continue
 
         if "single journey" not in rule:

@@ -6,8 +6,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from auth import get_current_user
-from db_tools import route_search
-from supabase_client import get_supabase
 
 logger = logging.getLogger(__name__)
 
@@ -37,53 +35,121 @@ def load_fares():
         return list(csv.DictReader(file))
 
 
-def get_service(route):
-    value = " ".join(
-        str(route.get(key) or "")
-        for key in (
-            "service_type", "route_type",
-            "route_name", "name", "route_id"
-        )
-    ).lower()
+def _norm(value):
+    import re
+    return " ".join(re.findall(r"[a-z0-9]+", str(value).lower()))
 
-    if "metrobus" in value or "metro bus" in value:
+
+def _read_csv(filename):
+    with open(FARES_FILE.parent / filename, encoding="utf-8-sig", newline="") as file:
+        return list(csv.DictReader(file))
+
+
+def _stop_candidates(query, stop_names):
+    """Exact/partial match; a unique first-word alias handles Liberty Market/Chowk."""
+    q = _norm(query)
+    if not q:
+        return set()
+    exact = {name for name in stop_names if _norm(name) == q}
+    if exact:
+        return exact
+    partial = {name for name in stop_names if q in _norm(name) or _norm(name) in q}
+    if partial:
+        return partial
+    first = q.split()[0]
+    candidates = {name for name in stop_names if _norm(name).split()[0] == first}
+    return candidates if len(candidates) == 1 else set()
+
+
+def _service(route):
+    label = _norm(" ".join(str(route.get(k) or "") for k in
+                           ("route_type", "system", "route_id")))
+    if "metrobus" in label or "metro bus" in label:
         return "metrobus"
-
-    if "feeder" in value or "speedo" in value:
+    if "feeder" in label or "speedo" in label:
         return "feeder"
-
-    if "orange" in value:
+    if "orange" in label:
         return "orange"
-
     return None
 
 
-def get_fare(route, fare_rows):
-    service = get_service(route)
-
-    if not service or service == "orange":
+def _single_fare(route, fares):
+    service = _service(route)
+    if service not in ("metrobus", "feeder"):
         return None
-
-    for row in fare_rows:
-        label = row.get("service_type", "").lower()
-        rule = row.get("fare_rule", "").lower()
-
-        # CSV uses "Lahore Metrobus System" and "Lahore Feeder Routes".
-        # Match normalized service names without changing stored fare values.
-        if service == "metrobus" and not ("metrobus" in label or "metro bus" in label):
+    for row in fares:
+        label = _norm(row.get("service_type", ""))
+        if service == "metrobus" and "metrobus" not in label and "metro bus" not in label:
             continue
-        if service == "feeder" and not ("feeder" in label or "speedo" in label):
+        if service == "feeder" and "feeder" not in label:
             continue
-
-        if "single journey" not in rule:
+        if _norm(row.get("fare_rule", "")) != "single journey":
             continue
-
         try:
             return float(row["fare_rs"])
         except (ValueError, TypeError, KeyError):
             continue
-
     return None
+
+
+def find_budget_journeys(origin, destination, fares, max_legs=3):
+    """Search only CSV-supported stops and forward ordered route segments."""
+    from collections import defaultdict, deque
+    routes = {r["route_id"]: r for r in _read_csv("routes.csv")}
+    ordered = defaultdict(list)
+    for item in _read_csv("route_stops.csv"):
+        if item["route_id"] in routes:
+            ordered[item["route_id"]].append(item)
+    edges = defaultdict(list)
+    names = set()
+    for route_id, items in ordered.items():
+        items.sort(key=lambda item: int(item["stop_sequence"]))
+        fare = _single_fare(routes[route_id], fares)
+        if fare is None:
+            continue
+        for i, boarding in enumerate(items):
+            start = _norm(boarding["stop_name"])
+            names.add(boarding["stop_name"])
+            for arrival in items[i + 1:]:
+                end = _norm(arrival["stop_name"])
+                names.add(arrival["stop_name"])
+                if start != end:
+                    edges[start].append((end, route_id, boarding["stop_name"],
+                                         arrival["stop_name"], fare))
+    starts = {_norm(s) for s in _stop_candidates(origin, names)}
+    ends = {_norm(s) for s in _stop_candidates(destination, names)}
+    if not starts or not ends:
+        return []
+    queue = deque((s, [], frozenset([s])) for s in starts)
+    found = []
+    while queue:
+        current, legs, visited = queue.popleft()
+        if current in ends and legs:
+            found.append(legs)
+            continue
+        if len(legs) >= max_legs:
+            continue
+        for nxt, rid, board, alight, fare in edges.get(current, []):
+            if nxt in visited:
+                continue
+            # Prevent unnecessary reboarding of the same route.
+            if any(l["route_id"] == rid for l in legs):
+                continue
+            new_leg = {"route_id": rid, "from": board, "to": alight,
+                       "fare": fare, "service": _service(routes[rid])}
+            queue.append((nxt, legs + [new_leg], visited | {nxt}))
+    # Avoid duplicate paths; prioritize low fares then fewer transfers.
+    found.sort(key=lambda path: (sum(leg["fare"] for leg in path), len(path)))
+    unique = []
+    seen = set()
+    for legs in found:
+        key = tuple((l["route_id"], _norm(l["from"]), _norm(l["to"])) for l in legs)
+        if key not in seen:
+            seen.add(key)
+            unique.append(legs)
+        if len(unique) >= 5:
+            break
+    return unique
 
 
 def save_record(table, data):
@@ -114,85 +180,55 @@ def recommend(
     user_id = str(user["user_id"])
 
     try:
-        logger.info("Budget AI: searching routes")
-        routes = route_search(
-            request.origin.strip(),
-            request.destination.strip()
-        )
-
-        logger.info("Budget AI: loading fares from %s", FARES_FILE)
+        logger.info("Budget AI: finding stop-based journeys")
         fares = load_fares()
-        journeys = 2 if request.return_trip else 1
-
+        journeys = find_budget_journeys(
+            request.origin.strip(), request.destination.strip(), fares
+        )
+        trip_multiplier = 2 if request.return_trip else 1
         options = []
-
-        for route in routes:
-            fare = get_fare(route, fares)
-
-            if fare is None:
-                continue
-
-            monthly_cost = round(
-                fare * journeys * request.travel_days, 2
-            )
-
+        for legs in journeys:
+            one_way = sum(leg["fare"] for leg in legs)
+            daily = round(one_way * trip_multiplier, 2)
+            monthly = round(daily * request.travel_days, 2)
+            route_names = " + ".join(leg["route_id"] for leg in legs)
             options.append({
-                "route_name": str(
-                    route.get("route_name")
-                    or route.get("name")
-                    or route.get("route_id")
-                    or "Unknown Route"
-                ),
-                "bus_service": get_service(route),
-                "fare_per_trip": fare,
-                "daily_cost": fare * journeys,
-                "monthly_cost": monthly_cost,
-                "remaining_budget": round(
-                    request.monthly_budget - monthly_cost, 2
-                ),
-                "within_budget": (
-                    monthly_cost <= request.monthly_budget
-                )
+                "route_name": route_names,
+                "bus_service": " + ".join(leg["service"] for leg in legs),
+                "fare_per_trip": round(one_way, 2),
+                "daily_cost": daily,
+                "monthly_cost": monthly,
+                "remaining_budget": round(request.monthly_budget - monthly, 2),
+                "within_budget": monthly <= request.monthly_budget,
+                "legs": legs,
+                "transfers": len(legs) - 1,
             })
-
-        options.sort(key=lambda x: x["monthly_cost"])
-
         best = options[0] if options else None
-
         if best:
             if request.language.lower().startswith("ur"):
                 reply = (
-                    f"Aap ke liye {best['route_name']} "
-                    f"ka estimated monthly kharcha "
-                    f"Rs. {best['monthly_cost']:.0f} hai. "
+                    f"{best['route_name']} ke liye ek taraf ka kiraya Rs. "
+                    f"{best['fare_per_trip']:.0f}, rozana Rs. {best['daily_cost']:.0f} "
+                    f"aur {request.travel_days} din ka kharcha Rs. "
+                    f"{best['monthly_cost']:.0f} hai. "
                 )
-                if best["within_budget"]:
-                    reply += (
-                        f"Rs. {best['remaining_budget']:.0f} "
-                        "budget mein bachenge."
-                    )
-                else:
-                    reply += "Ye route aapke budget se zyada hai."
+                reply += ("Budget mein hai." if best["within_budget"]
+                          else "Budget se zyada hai.")
             else:
                 reply = (
-                    f"Best available direct option: "
-                    f"{best['route_name']}. "
-                    f"Estimated monthly cost: "
-                    f"Rs. {best['monthly_cost']:.0f}. "
-                )
-                reply += (
-                    "Within budget."
-                    if best["within_budget"]
-                    else "Over budget."
+                    f"Best available route: {best['route_name']} "
+                    f"({best['transfers']} transfers). "
+                    f"One-way Rs. {best['fare_per_trip']:.0f}, "
+                    f"daily Rs. {best['daily_cost']:.0f}, "
+                    f"monthly Rs. {best['monthly_cost']:.0f}. "
+                    + ("Within budget." if best["within_budget"] else "Over budget.")
                 )
         else:
             reply = (
-                "Is route ke liye verified direct bus fare "
-                "nahi mila. Starting point aur destination "
-                "check karein."
-                if request.language.lower().startswith("ur")
-                else
-                "No direct route with a calculable fare found."
+                "Is safar ke liye available dataset mein connected route "
+                "aur fare nahi mila."
+                if request.language.lower().startswith("ur") else
+                "No supported journey found in the available route and fare data."
             )
 
         logger.info("Budget AI: saving travel budget")
@@ -235,8 +271,10 @@ def recommend(
             "alternatives": options[1:5],
             "travel_days": request.travel_days,
             "notice": (
-                "Estimates use stored fare reference data. "
-                "Confirm current fares before travelling."
+                "Estimates use stored route-stop and fare data. "
+                "Only listed services and forward stop order are supported; "
+                "return travel assumes the same fare in reverse. "
+                "Confirm routes and current fares before travelling."
             )
         }
 
